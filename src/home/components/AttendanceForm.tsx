@@ -1,25 +1,23 @@
-const AttendanceForm = () => {
-  return (
-    <div className="w-full max-w-md my-6">
-      {/* Formulario de asistencia */}
-      <form className="flex flex-col items-center gap-2">
-        <span className="font-semibold">¿Puedes asistir?</span>
-        <div className="flex gap-4">
-          <button
-            type="button"
-            className="bg-green-500 text-white px-4 py-2 rounded"
-          >
-            Sí
-          </button>
-          <button
-            type="button"
-            className="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            No
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
+import { Button, Card, CardBody, Form, Radio, RadioGroup } from "@heroui/react";
+
+const AttendanceForm = () => (
+  <Card className="w-full max-w-md my-6 mx-auto p-6">
+    <CardBody>
+      <Form>
+        <span className="font-semibold mb-2 block">¿Puedes asistir?</span>
+        <RadioGroup
+          name="attendance"
+          className="mb-4 flex gap-4 justify-center"
+        >
+          <Radio value="yes">Sí</Radio>
+          <Radio value="no">No</Radio>
+        </RadioGroup>
+        <Button type="submit" variant="shadow" className="mt-2">
+          Enviar
+        </Button>
+      </Form>
+    </CardBody>
+  </Card>
+);
+
 export default AttendanceForm;

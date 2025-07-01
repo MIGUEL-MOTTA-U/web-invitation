@@ -1,30 +1,39 @@
-const DressCode = () => {
-  return (
-    <div className="w-full flex flex-col items-center my-4">
-      <span className="mb-2 font-semibold">Dress Code</span>
-      <div className="flex gap-4">
-        <button
+import { Button, Card, CardBody } from "@heroui/react";
+
+// Puedes importar íconos de HeroUI o usar emojis por ahora
+
+const DressCode = () => (
+  <Card className="w-full max-w-md my-4 mx-auto p-4 flex flex-col items-center">
+    <CardBody>
+      <span className="mb-2 font-semibold text-center block">Dress Code</span>
+      <div className="flex gap-4 justify-center">
+        <Button
           type="button"
-          className="flex flex-col items-center bg-blue-100 p-2 rounded hover:bg-blue-200 transition"
+          variant="flat"
+          as="a"
+          href="https://www.pinterest.com/search/pins/?q=men%20wedding%20dress%20code"
+          target="_blank"
         >
-          {/* Icono hombre */}
-          <span role="img" aria-label="hombre" className="text-2xl">
+          <span role="img" aria-label="hombre" className="mr-2">
             👔
           </span>
           Hombre
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
-          className="flex flex-col items-center bg-pink-100 p-2 rounded hover:bg-pink-200 transition"
+          variant="flat"
+          as="a"
+          href="https://www.pinterest.com/search/pins/?q=women%20wedding%20dress%20code"
+          target="_blank"
         >
-          {/* Icono mujer */}
-          <span role="img" aria-label="mujer" className="text-2xl">
+          <span role="img" aria-label="mujer" className="mr-2">
             👗
           </span>
           Mujer
-        </button>
+        </Button>
       </div>
-    </div>
-  );
-};
+    </CardBody>
+  </Card>
+);
+
 export default DressCode;
