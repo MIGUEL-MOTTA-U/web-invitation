@@ -1,38 +1,34 @@
 import { Button } from "@heroui/react";
-import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import "./PhotoCarousel.css";
 
-const images = [
-  "src/assets/images/carousel/c1.jpg",
-  "src/assets/images/carousel/c2.jpg",
-  "src/assets/images/carousel/c3.jpg",
-  "src/assets/images/carousel/c4.jpg",
-  "src/assets/images/carousel/c5.jpg",
-  "src/assets/images/carousel/c6.jpg",
-  "src/assets/images/carousel/c7.jpg",
-  "src/assets/images/carousel/c8.jpg",
-  "src/assets/images/carousel/c9.jpg",
-];
+// Importar las imágenes directamente para que Vite las procese correctamente
+import c1 from "../../assets/images/carousel/c1.jpg";
+import c2 from "../../assets/images/carousel/c2.jpg";
+import c3 from "../../assets/images/carousel/c3.jpg";
+import c4 from "../../assets/images/carousel/c4.jpg";
+import c5 from "../../assets/images/carousel/c5.jpg";
+import c6 from "../../assets/images/carousel/c6.jpg";
+import c7 from "../../assets/images/carousel/c7.jpg";
+import c8 from "../../assets/images/carousel/c8.jpg";
+import c9 from "../../assets/images/carousel/c9.jpg";
+
+const images = [c1, c2, c3, c4, c5, c6, c7, c8, c9];
 
 const getIndex = (idx: number) => (idx + images.length) % images.length;
 
 const PhotoCarousel = () => {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0); // -1: izquierda, 1: derecha
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
   const prev = () => {
-    setDirection(-1);
     setCurrent((prev) => getIndex(prev - 1));
   };
   const next = () => {
-    setDirection(1);
     setCurrent((prev) => getIndex(prev + 1));
   };
   const goTo = (idx: number) => {
-    setDirection(idx > current ? 1 : -1);
     setCurrent(getIndex(idx));
   };
 
@@ -57,25 +53,6 @@ const PhotoCarousel = () => {
   // Índices de las imágenes a mostrar
   const prevIdx = getIndex(current - 1);
   const nextIdx = getIndex(current + 1);
-
-  // Variants para la animación
-  const variants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? 300 : -300,
-      opacity: 0,
-      position: "absolute" as const,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      position: "relative" as const,
-    },
-    exit: (dir: number) => ({
-      x: dir > 0 ? -300 : 300,
-      opacity: 0,
-      position: "absolute" as const,
-    }),
-  };
 
   return (
     <div className="w-full max-w-2xl mx-auto my-8 flex flex-col items-center select-none">
@@ -113,22 +90,14 @@ const PhotoCarousel = () => {
             draggable={false}
           />
         </button>
-        {/* Imagen principal animada */}
-        <AnimatePresence custom={direction} initial={false} mode="wait">
-          <motion.img
-            key={images[current]}
-            src={images[current]}
-            alt={`Foto ${current + 1}`}
-            className="relative z-20 w-2/3 h-56 md:h-72 object-cover rounded-xl shadow-xl border-4 border-white mx-auto"
-            draggable={false}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          />
-        </AnimatePresence>
+        {/* Imagen principal */}
+        <img
+          key={images[current]}
+          src={images[current]}
+          alt={`Foto ${current + 1}`}
+          className="relative z-20 w-2/3 h-56 md:h-72 object-cover rounded-xl shadow-xl border-4 border-white mx-auto transition-opacity duration-300"
+          draggable={false}
+        />
         {/* Botón anterior */}
         <Button
           variant="light"
