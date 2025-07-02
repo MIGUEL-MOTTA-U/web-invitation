@@ -42,7 +42,10 @@ jobs:
           echo "Build completed successfully!"
 
       - name: Zip dist folder for deployment
-        run: zip -r release.zip dist/ -x "*.map"
+        run: |
+          cd dist
+          zip -r ../release.zip . -x "*.map"
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -67,10 +70,8 @@ jobs:
         run: unzip release.zip
       
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'alexander-marcela-wedding'
-          slot-name: 'Production'
-          package: dist/
+          package: release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1D2E265482BD4D2BA17F0E5889C71281 }}
