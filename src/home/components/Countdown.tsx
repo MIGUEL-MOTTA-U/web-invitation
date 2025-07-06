@@ -1,5 +1,5 @@
 import { Card } from "@heroui/react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -14,25 +14,27 @@ const Countdown = () => {
     const calculateTimeLeft = () => {
       const targetDate = new Date("2025-08-15T18:00:00-05:00");
       const now = new Date();
-      const colombiaOffset = -5 * 60; 
+      const colombiaOffset = -5 * 60;
       const localOffset = now.getTimezoneOffset();
-      const colombiaTime = new Date(now.getTime() + (localOffset + colombiaOffset) * 60 * 1000);
-      
+      const colombiaTime = new Date(
+        now.getTime() + (localOffset + colombiaOffset) * 60 * 1000
+      );
+
       const difference = targetDate.getTime() - colombiaTime.getTime();
 
       if (difference > 0) {
         const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30.44));
-        
-        const daysInMs = difference - (months * 1000 * 60 * 60 * 24 * 30.44);
+
+        const daysInMs = difference - months * 1000 * 60 * 60 * 24 * 30.44;
         const days = Math.floor(daysInMs / (1000 * 60 * 60 * 24));
-        
-        const hoursInMs = daysInMs - (days * 1000 * 60 * 60 * 24);
+
+        const hoursInMs = daysInMs - days * 1000 * 60 * 60 * 24;
         const hours = Math.floor(hoursInMs / (1000 * 60 * 60));
-        
-        const minutesInMs = hoursInMs - (hours * 1000 * 60 * 60);
+
+        const minutesInMs = hoursInMs - hours * 1000 * 60 * 60;
         const minutes = Math.floor(minutesInMs / (1000 * 60));
-        
-        const secondsInMs = minutesInMs - (minutes * 1000 * 60);
+
+        const secondsInMs = minutesInMs - minutes * 1000 * 60;
         const seconds = Math.floor(secondsInMs / 1000);
 
         setTimeLeft({ months, days, hours, minutes, seconds });

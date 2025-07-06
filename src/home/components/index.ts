@@ -5,6 +5,7 @@ import Countdown from "./Countdown";
 import DressCode from "./DressCode";
 import Location from "./Location";
 import PhotoCarousel from "./PhotoCarousel";
+import Timeline from "./Timeline";
 import WeddingMap from "./WeddingMessage";
 import WeddingMessage from "./WeddingMessage";
 
@@ -16,6 +17,7 @@ export {
   DressCode,
   Location,
   PhotoCarousel,
+  Timeline,
   WeddingMap,
   WeddingMessage,
 };
