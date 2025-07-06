@@ -14,6 +14,7 @@ export interface CreateGuestRequest {
   phone: string;
   phoneCountryCode: string;
   message?: string;
+  confirmed: boolean;
 }
 
 export interface OutputMessage {
@@ -23,4 +24,4 @@ export interface OutputMessage {
   payload?: {
     userId: string;
   };
-} 
+}
