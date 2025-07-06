@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { guestsService, CreateGuestRequest } from '../services/guestsService';
+import { type CreateGuestRequest, guestsService } from '../services/guestsService';
 
 export const useGuestForm = () => {
   const [loading, setLoading] = useState(false);
