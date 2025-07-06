@@ -31,8 +31,6 @@ export interface OutputMessage {
 class GuestsService {
   // Crear un nuevo invitado
   async createGuest(guestData: CreateGuestRequest): Promise<OutputMessage> {
-    const fullUrl = api.getUri({ url: '/guests' });
-  console.info(`Request will go to: ${fullUrl}`);
     const response = await api.post('/guests', guestData);
     return response.data;
   }
