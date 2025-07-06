@@ -41,10 +41,7 @@ const Countdown = () => {
       }
     };
 
-    // Calcular inmediatamente
     calculateTimeLeft();
-    
-    // Actualizar cada segundo
     const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);

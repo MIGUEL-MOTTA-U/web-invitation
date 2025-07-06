@@ -4,6 +4,7 @@ import {
   BrideGroomImage,
   Countdown,
   DressCode,
+  Location,
   PhotoCarousel,
   WeddingMessage,
 } from "./components";
@@ -15,6 +16,7 @@ const WeddingInvitation = () => {
       <WeddingMessage />
       <Countdown />
       <AddToCalendar />
+      <Location />
       <DressCode />
       <PhotoCarousel />
       <AttendanceForm />

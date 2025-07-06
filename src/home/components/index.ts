@@ -3,6 +3,7 @@ import AttendanceForm from "./AttendanceForm";
 import BrideGroomImage from "./BrideGroomImage";
 import Countdown from "./Countdown";
 import DressCode from "./DressCode";
+import Location from "./Location";
 import PhotoCarousel from "./PhotoCarousel";
 import WeddingMap from "./WeddingMessage";
 import WeddingMessage from "./WeddingMessage";
@@ -13,6 +14,7 @@ export {
   BrideGroomImage,
   Countdown,
   DressCode,
+  Location,
   PhotoCarousel,
   WeddingMap,
   WeddingMessage,
