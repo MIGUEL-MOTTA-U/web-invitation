@@ -13,11 +13,9 @@ export const useGuestForm = () => {
       const response = await guestsService.createGuest(guestData);
       toast.success(response.message || "¡Invitación enviada exitosamente!");
       return response;
-    } catch (err: any) {
-      const errorMessage =
-        err.response?.data?.message ||
-        err.message ||
-        "Error al enviar el formulario";
+    } catch (e: unknown) {
+      const err = e as Error;
+      const errorMessage = err.message || "Error al enviar el formulario";
       toast.error(errorMessage);
       throw err;
     } finally {

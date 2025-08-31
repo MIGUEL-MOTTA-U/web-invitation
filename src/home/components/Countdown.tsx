@@ -1,45 +1,32 @@
-import { Card } from "@heroui/react";
 import { useEffect, useState } from "react";
 
 const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState({
-    months: 0,
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0,
   });
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const targetDate = new Date("2025-08-15T18:00:00-05:00");
+      // Fecha objetivo: 19 de diciembre de 2025 a las 2:00 PM (hora de Colombia)
+      const targetDate = new Date("2025-12-19T14:00:00-05:00");
       const now = new Date();
-      const colombiaOffset = -5 * 60;
-      const localOffset = now.getTimezoneOffset();
-      const colombiaTime = new Date(
-        now.getTime() + (localOffset + colombiaOffset) * 60 * 1000
-      );
 
-      const difference = targetDate.getTime() - colombiaTime.getTime();
+      const difference = targetDate.getTime() - now.getTime();
 
       if (difference > 0) {
-        const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30.44));
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
 
-        const daysInMs = difference - months * 1000 * 60 * 60 * 24 * 30.44;
-        const days = Math.floor(daysInMs / (1000 * 60 * 60 * 24));
-
-        const hoursInMs = daysInMs - days * 1000 * 60 * 60 * 24;
+        const hoursInMs = difference - days * 1000 * 60 * 60 * 24;
         const hours = Math.floor(hoursInMs / (1000 * 60 * 60));
 
         const minutesInMs = hoursInMs - hours * 1000 * 60 * 60;
         const minutes = Math.floor(minutesInMs / (1000 * 60));
 
-        const secondsInMs = minutesInMs - minutes * 1000 * 60;
-        const seconds = Math.floor(secondsInMs / 1000);
-
-        setTimeLeft({ months, days, hours, minutes, seconds });
+        setTimeLeft({ days, hours, minutes });
       } else {
-        setTimeLeft({ months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setTimeLeft({ days: 0, hours: 0, minutes: 0 });
       }
     };
 
@@ -54,30 +41,44 @@ const Countdown = () => {
   };
 
   return (
-    <Card className="w-full max-w-md my-4 mx-auto p-4 flex flex-col items-center">
-      <h3 className="text-lg font-semibold text-gray-800 mb-3">
-        ¡Faltan para nuestro gran día!
-      </h3>
-      <div className="flex flex-row gap-3 w-full justify-center">
+    <div className="w-full max-w-6xl mx-auto my-8 flex flex-col items-center">
+      {/* Título principal */}
+      <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8 text-center font-lora tracking-wider">
+        GUARDA LA FECHA
+      </h2>
+
+      {/* Contador principal */}
+      <div className="flex flex-row gap-6 md:gap-8 w-full justify-center items-center">
         {[
-          { value: timeLeft.months, label: "Meses" },
-          { value: timeLeft.days, label: "Días" },
-          { value: timeLeft.hours, label: "Horas" },
-          { value: timeLeft.minutes, label: "Min" },
-          { value: timeLeft.seconds, label: "Seg" },
+          { value: timeLeft.days, label: "DÍAS" },
+          { value: timeLeft.hours, label: "HORAS" },
+          { value: timeLeft.minutes, label: "MINUTOS" },
         ].map(({ value, label }) => (
-          <div key={label} className="flex flex-col items-center gap-1">
-            <span className="text-xl font-bold text-primary-600">
-              {formatNumber(value)}
+          <div key={label} className="flex flex-col items-center gap-4">
+            {/* Tarjeta negra con número */}
+            <div className="bg-primary text-secondary w-32 h-32 md:w-40 md:h-40 rounded-2xl flex items-center justify-center shadow-2xl border-4 border-primary">
+              <span className="text-5xl md:text-6xl font-bold font-lora tracking-wider">
+                {formatNumber(value)}
+              </span>
+            </div>
+            {/* Etiqueta */}
+            <span className="text-lg md:text-xl font-semibold text-primary font-lora tracking-wider">
+              {label}
             </span>
-            <span className="text-xs text-gray-500">{label}</span>
           </div>
         ))}
       </div>
-      <p className="text-sm text-gray-600 mt-2 text-center">
-        15 de Agosto, 2025 • 6:00 PM
-      </p>
-    </Card>
+
+      {/* Fecha del evento */}
+      <div className="mt-8 text-center">
+        <p className="text-xl md:text-2xl font-bold text-primary font-lora tracking-wider">
+          19 DE DICIEMBRE, 2025
+        </p>
+        <p className="text-lg md:text-xl text-primary/80 font-lora tracking-wider mt-2">
+          2:00 PM
+        </p>
+      </div>
+    </div>
   );
 };
 

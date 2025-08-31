@@ -4,7 +4,6 @@ import noviosImage from "../../assets/images/novios.jpg";
 const BrideGroomImage = () => (
   <Card className="w-full max-w-md my-6 mx-auto">
     <CardBody className="aspect-[3/4] flex items-center justify-center bg-gray-200 overflow-hidden p-0">
-      {/* Usa el componente Image de HeroUI para la foto real */}
       <Image
         src={noviosImage}
         alt="Novios"

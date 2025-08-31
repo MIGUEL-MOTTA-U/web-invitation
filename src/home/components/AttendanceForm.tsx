@@ -5,15 +5,13 @@ import {
   Input,
   Radio,
   RadioGroup,
-  Textarea,
 } from "@heroui/react";
 import type React from "react";
 import { useState } from "react";
-import { CountryCodeSelector } from "../../components/CountryCodeSelector";
 import { useGuestForm } from "../../hooks/useGuestForm";
 
 interface FormData {
-  name: string;
+  names: string[];
   email: string;
   phone: string;
   message: string;
@@ -22,18 +20,20 @@ interface FormData {
 
 const AttendanceForm = () => {
   const { loading, submitGuestForm } = useGuestForm();
-  const [countryCode, setCountryCode] = useState("+57"); // Colombia por defecto
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [countryCode, _setCountryCode] = useState("+57");
   const [formData, setFormData] = useState<FormData>({
-    name: "",
+    names: [""],
     email: "",
     phone: "",
     message: "",
     confirmed: false,
   });
+  const [nameIds] = useState(() => [crypto.randomUUID()]);
 
   const handleInputChange = (
     field: keyof FormData,
-    value: string | boolean
+    value: string | boolean | string[]
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -41,13 +41,44 @@ const AttendanceForm = () => {
     }));
   };
 
+  const handleNameChange = (index: number, value: string) => {
+    const newNames = [...formData.names];
+    newNames[index] = value;
+    setFormData((prev) => ({
+      ...prev,
+      names: newNames,
+    }));
+  };
+
+  const addAccompanist = () => {
+    setFormData((prev) => ({
+      ...prev,
+      names: [...prev.names, ""],
+    }));
+    nameIds.push(crypto.randomUUID());
+  };
+
+  const removeAccompanist = (index: number) => {
+    if (formData.names.length > 1) {
+      const newNames = formData.names.filter((_, i) => i !== index);
+      setFormData((prev) => ({
+        ...prev,
+        names: newNames,
+      }));
+      nameIds.splice(index, 1);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Filtrar nombres vacíos y verificar que al menos uno tenga contenido
+    const validNames = formData.names.filter((name) => name.trim());
+
     if (
-      !formData.name.trim() ||
-      !formData.email.trim() ||
-      !formData.phone.trim()
+      validNames.length === 0 //||
+      //!formData.email.trim() ||
+      //!formData.phone.trim()
     ) {
       alert("Por favor completa todos los campos obligatorios");
       return;
@@ -55,7 +86,7 @@ const AttendanceForm = () => {
 
     try {
       await submitGuestForm({
-        name: formData.name,
+        name: validNames.join(", "),
         email: formData.email,
         phone: formData.phone,
         phoneCountryCode: countryCode,
@@ -65,7 +96,7 @@ const AttendanceForm = () => {
 
       // Limpiar formulario después del éxito
       setFormData({
-        name: "",
+        names: [""],
         email: "",
         phone: "",
         message: "",
@@ -77,27 +108,82 @@ const AttendanceForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-md my-6 mx-auto p-6">
-      <CardBody>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <Card className="w-full max-w-md my-6 mx-auto p-6 bg-transparent shadow-none border-none">
+      <CardBody className="p-0">
+        <form onSubmit={handleSubmit} className="space-y-10">
+          <div>
+            <span className="font-bold mb-2 block uppercase text-center font-lora tracking-[3px]">
+              Confirmar asistencia
+            </span>
+            <span className="m-6 block text-center font-lora tracking-[3px]">
+              <span className="block whitespace-nowrap">
+                Por favor, confirma tu asistencia
+              </span>
+              <span className="block">¡Esperamos que estés allí!</span>
+            </span>
+            <RadioGroup
+              value={formData.confirmed ? "yes" : "no"}
+              onValueChange={(value) =>
+                handleInputChange("confirmed", value === "yes")
+              }
+              className="mb-4 flex gap-4 justify-center"
+            >
+              <Radio value="yes">Sí, allí estaré</Radio>
+              <Radio value="no">No podré asistir</Radio>
+            </RadioGroup>
+          </div>
+
           <div>
             <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              htmlFor="name-0"
+              className="block text-sm font-medium text-gray-700 mb-2 "
             >
               Nombre y Apellido *
             </label>
-            <Input
-              id="name"
-              type="text"
-              value={formData.name}
-              onChange={(e) => handleInputChange("name", e.target.value)}
-              placeholder="Tu nombre completo"
-              required
-              className="w-full"
-            />
+            <div className="space-y-3">
+              {formData.names.map((name, index) => (
+                <div key={nameIds[index]} className="flex gap-2">
+                  <Input
+                    id={index === 0 ? "name-0" : undefined}
+                    type="text"
+                    value={name}
+                    onChange={(e) => handleNameChange(index, e.target.value)}
+                    placeholder={
+                      index === 0 ? "Tu nombre completo" : "Nombre Completo"
+                    }
+                    required={index === 0}
+                    className="flex-1 bg-transparent"
+                    variant="bordered"
+                    color="primary"
+                  />
+                  {index > 0 && (
+                    <Button
+                      type="button"
+                      variant="light"
+                      color="danger"
+                      size="sm"
+                      onPress={() => removeAccompanist(index)}
+                      className="px-3 min-w-0 bg-transparent border-none"
+                    >
+                      ×
+                    </Button>
+                  )}
+                </div>
+              ))}
+              <Button
+                type="button"
+                variant="light"
+                color="primary"
+                size="sm"
+                onPress={addAccompanist}
+                className="w-full bg-transparent border-none"
+              >
+                + Agregar Acompañante
+              </Button>
+            </div>
           </div>
 
+          {/*
           <div>
             <label
               htmlFor="email"
@@ -105,6 +191,7 @@ const AttendanceForm = () => {
             >
               Correo Electrónico *
             </label>
+            
             <Input
               id="email"
               type="email"
@@ -112,9 +199,11 @@ const AttendanceForm = () => {
               onChange={(e) => handleInputChange("email", e.target.value)}
               placeholder="tu@email.com"
               required
-              className="w-full"
+              className="w-full bg-transparent border-none"
             />
+            
           </div>
+          
 
           <div>
             <label
@@ -135,11 +224,12 @@ const AttendanceForm = () => {
                 onChange={(e) => handleInputChange("phone", e.target.value)}
                 placeholder="3001234567"
                 required
-                className="w-full rounded-l-none"
+                className="w-full rounded-l-none bg-transparent border-none"
               />
             </div>
           </div>
 
+          
           <div>
             <label
               htmlFor="message"
@@ -152,32 +242,20 @@ const AttendanceForm = () => {
               value={formData.message}
               onChange={(e) => handleInputChange("message", e.target.value)}
               placeholder="Te recomendamos..."
-              className="w-full"
+              className="w-full bg-transparent border-none"
               rows={3}
             />
           </div>
-
-          <div>
-            <span className="font-semibold mb-2 block">¿Puedes asistir?</span>
-            <RadioGroup
-              value={formData.confirmed ? "yes" : "no"}
-              onValueChange={(value) =>
-                handleInputChange("confirmed", value === "yes")
-              }
-              className="mb-4 flex gap-4 justify-center"
-            >
-              <Radio value="yes">Sí</Radio>
-              <Radio value="no">No</Radio>
-            </RadioGroup>
-          </div>
+          */}
 
           <Button
             type="submit"
-            variant="shadow"
-            className="w-full"
+            variant="bordered"
+            className="w-full uppercase bg-transparent"
             disabled={loading}
+            color="primary"
           >
-            {loading ? "Enviando..." : "Enviar"}
+            {loading ? "Enviando..." : "Enviar Respuesta"}
           </Button>
         </form>
       </CardBody>

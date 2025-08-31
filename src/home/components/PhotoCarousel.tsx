@@ -1,19 +1,10 @@
-import { Button } from "@heroui/react";
 import { useRef, useState } from "react";
 import "./PhotoCarousel.css";
 
-// Importar las imágenes directamente para que Vite las procese correctamente
-import c1 from "../../assets/images/carousel/c1.jpg";
 import c2 from "../../assets/images/carousel/c2.jpg";
-import c3 from "../../assets/images/carousel/c3.jpg";
-import c4 from "../../assets/images/carousel/c4.jpg";
-import c5 from "../../assets/images/carousel/c5.jpg";
-import c6 from "../../assets/images/carousel/c6.jpg";
-import c7 from "../../assets/images/carousel/c7.jpg";
-import c8 from "../../assets/images/carousel/c8.jpg";
-import c9 from "../../assets/images/carousel/c9.jpg";
+import c1 from "../../assets/images/carousel/f1.jpg";
 
-const images = [c1, c2, c3, c4, c5, c6, c7, c8, c9];
+const images = [c1, c2]; //, c3, c4, c5, c6, c7, c8, c9];
 
 const getIndex = (idx: number) => (idx + images.length) % images.length;
 
@@ -27,9 +18,6 @@ const PhotoCarousel = () => {
   };
   const next = () => {
     setCurrent((prev) => getIndex(prev + 1));
-  };
-  const goTo = (idx: number) => {
-    setCurrent(getIndex(idx));
   };
 
   // Swipe handlers
@@ -50,74 +38,51 @@ const PhotoCarousel = () => {
     touchEndX.current = null;
   };
 
-  // Índices de las imágenes a mostrar
-  const prevIdx = getIndex(current - 1);
-  const nextIdx = getIndex(current + 1);
-
   return (
-    <div className="w-full max-w-2xl mx-auto my-8 flex flex-col items-center select-none">
+    <div className="w-full h-screen mx-auto flex flex-col items-center justify-center select-none relative">
       <div
-        className="relative w-full flex items-center justify-center h-64 md:h-80"
+        className="relative w-full h-[50rem] flex items-center justify-center"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {/* Imagen anterior (peek) */}
-        <button
-          type="button"
-          className="carousel-peek-btn absolute left-0 top-1/2 -translate-y-1/2 w-1/3 h-40 md:h-56 z-10 p-0 m-0 bg-transparent border-none outline-none cursor-pointer"
-          onClick={() => goTo(prevIdx)}
-          aria-label={`Ver foto ${prevIdx + 1}`}
-        >
-          <img
-            src={images[prevIdx]}
-            alt={`Foto ${prevIdx + 1}`}
-            className="object-cover w-full h-full rounded-lg opacity-60 transition-all duration-300 hover:opacity-80 shadow-md"
-            draggable={false}
-          />
-        </button>
-        {/* Imagen siguiente (peek) */}
-        <button
-          type="button"
-          className="carousel-peek-btn absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-40 md:h-56 z-10 p-0 m-0 bg-transparent border-none outline-none cursor-pointer"
-          onClick={() => goTo(nextIdx)}
-          aria-label={`Ver foto ${nextIdx + 1}`}
-        >
-          <img
-            src={images[nextIdx]}
-            alt={`Foto ${nextIdx + 1}`}
-            className="object-cover w-full h-full rounded-lg opacity-60 transition-all duration-300 hover:opacity-80 shadow-md"
-            draggable={false}
-          />
-        </button>
-        {/* Imagen principal */}
+        {/* Imagen principal - altura fija de 500px con recorte */}
         <img
           key={images[current]}
           src={images[current]}
           alt={`Foto ${current + 1}`}
-          className="relative z-20 w-2/3 h-56 md:h-72 object-cover rounded-xl shadow-xl border-4 border-white mx-auto transition-opacity duration-300"
+          className="relative z-20 w-full h-[800px] object-cover mx-auto transition-opacity duration-300"
           draggable={false}
         />
+
         {/* Botón anterior */}
+        {/*
         <Button
           variant="light"
-          className="carousel-arrow absolute left-2 top-1/2 -translate-y-1/2 z-30 text-3xl px-2 py-0 min-w-0 min-h-0 bg-transparent hover:text-primary-500 focus:text-primary-500 border-none shadow-none"
+          className="carousel-arrow absolute left-4 top-1/2 -translate-y-1/2 z-30 text-4xl px-3 py-2 min-w-0 min-h-0 bg-white/80 hover:bg-white text-primary hover:text-primary-800 border-none shadow-lg rounded-full backdrop-blur-sm"
           onPress={prev}
         >
           ‹
         </Button>
-        {/* Botón siguiente */}
+        
+        {/* Botón siguiente 
         <Button
           variant="light"
-          className="carousel-arrow absolute right-2 top-1/2 -translate-y-1/2 z-30 text-3xl px-2 py-0 min-w-0 min-h-0 bg-transparent hover:text-primary-500 focus:text-primary-500 border-none shadow-none"
+          className="carousel-arrow absolute right-4 top-1/2 -translate-y-1/2 z-30 text-4xl px-3 py-2 min-w-0 min-h-0 bg-white/80 hover:bg-white text-primary hover:text-primary-800 border-none shadow-lg rounded-full backdrop-blur-sm"
           onPress={next}
         >
           ›
         </Button>
+        */}
       </div>
-      <div className="mt-4 text-xs text-gray-500">
-        {current + 1} / {images.length}
+
+      {/* Indicador de posición 
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+        <span className="text-sm font-medium text-primary">
+          {current + 1} / {images.length}
+        </span>
       </div>
+      */}
     </div>
   );
 };

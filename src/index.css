@@ -1,3 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fuente local Liana */
+@font-face {
+  font-family: "Liana";
+  src: url("/fonts/Liana/liana.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variables CSS personalizadas para el tema */
+:root {
+  --color-primary-50: #f8f9fa;
+  --color-primary-100: #e9ecef;
+  --color-primary-200: #dee2e6;
+  --color-primary-300: #ced4da;
+  --color-primary-400: #adb5bd;
+  --color-primary-500: #6c757d;
+  --color-primary-600: #495057;
+  --color-primary-700: #343a40;
+  --color-primary-800: #212529;
+  --color-primary-900: #000000;
+  --color-primary: #000000;
+
+  --color-secondary-50: #ffffff;
+  --color-secondary-100: #f8f9fa;
+  --color-secondary-200: #e9ecef;
+  --color-secondary-300: #dee2e6;
+  --color-secondary-400: #ced4da;
+  --color-secondary-500: #adb5bd;
+  --color-secondary-600: #6c757d;
+  --color-secondary-700: #495057;
+  --color-secondary-800: #343a40;
+  --color-secondary-900: #212529;
+  --color-secondary: #ffffff;
+}
+
+/* Configuración base de fuentes */
+@layer base {
+  html {
+    font-family: "Lora", serif;
+  }
+
+  body {
+    font-family: "Lora", serif;
+    color: var(--color-primary);
+    background-color: var(--color-secondary);
+  }
+
+  /* Clases de utilidad para fuentes */
+  .font-liana {
+    font-family: "Liana", cursive;
+  }
+
+  .font-lora {
+    font-family: "Lora", serif;
+  }
+
+  .font-caveat {
+    font-family: "Caveat", cursive;
+  }
+
+  .font-press-start {
+    font-family: "Press Start 2P", cursive;
+  }
+
+  /* Clases de utilidad para colores del tema */
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+
+  .border-secondary {
+    border-color: var(--color-secondary);
+  }
+}

@@ -1,6 +1,59 @@
+/* Estilos para el carrusel fullscreen */
+.carousel-peek-btn {
+  transition: all 0.3s ease;
+}
+
+.carousel-peek-btn:hover {
+  transform: scale(1.05);
+}
+
 .carousel-peek-btn.left {
   left: 2%;
 }
+
 .carousel-peek-btn.right {
   right: 2%;
+}
+
+/* Estilos para los botones de navegación */
+.carousel-arrow {
+  transition: all 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  transform: scale(1.1);
+}
+
+/* Animaciones para las imágenes */
+.carousel-peek-btn img {
+  transition: all 0.3s ease;
+}
+
+.carousel-peek-btn:hover img {
+  transform: scale(1.02);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-peek-btn {
+    width: 30%;
+    height: 60%;
+  }
+
+  .carousel-arrow {
+    font-size: 2rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-peek-btn {
+    width: 25%;
+    height: 50%;
+  }
+
+  .carousel-arrow {
+    font-size: 1.5rem;
+    padding: 0.25rem;
+  }
 }
