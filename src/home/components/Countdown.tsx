@@ -43,21 +43,35 @@ const Countdown = () => {
   return (
     <div className="w-full max-w-6xl mx-auto my-8 flex flex-col items-center">
       {/* Título principal */}
-      <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8 text-center font-lora tracking-wider">
+      <h2 className="text-[2rem] font-normal text-primary mb-8 text-center font-lora tracking-wider">
         GUARDA LA FECHA
       </h2>
 
       {/* Contador principal */}
-      <div className="flex flex-row gap-6 md:gap-8 w-full justify-center items-center">
+      <div className="flex flex-row gap-32 w-full justify-center items-center">
         {[
           { value: timeLeft.days, label: "DÍAS" },
           { value: timeLeft.hours, label: "HORAS" },
           { value: timeLeft.minutes, label: "MINUTOS" },
         ].map(({ value, label }) => (
-          <div key={label} className="flex flex-col items-center gap-4">
-            {/* Tarjeta negra con número */}
-            <div className="bg-primary text-secondary w-32 h-32 md:w-40 md:h-40 rounded-2xl flex items-center justify-center shadow-2xl border-4 border-primary">
-              <span className="text-5xl md:text-6xl font-bold font-lora tracking-wider">
+          <div key={label} className="flex flex-col items-center gap-6">
+            {/* Tarjeta negra con número responsiva */}
+            <div
+              className="bg-primary text-secondary 
+                w-[10rem] h-[10rem] 
+                sm:w-[14rem] sm:h-[14rem] 
+                md:w-[18rem] md:h-[18rem] 
+                lg:w-[25rem] lg:h-[25rem] 
+                rounded-2xl flex items-center justify-center shadow-2xl border-4 border-primary"
+            >
+              <span
+                className="
+                  text-[4.5rem] 
+                  sm:text-[6rem] 
+                  md:text-[9rem] 
+                  lg:text-[12rem] 
+                  font-bold font-lora tracking-wider"
+              >
                 {formatNumber(value)}
               </span>
             </div>

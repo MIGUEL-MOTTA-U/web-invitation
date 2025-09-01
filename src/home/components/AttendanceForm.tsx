@@ -108,14 +108,14 @@ const AttendanceForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-md my-6 mx-auto p-6 bg-transparent shadow-none border-none">
+    <Card className="w-full max-w-lg my-6 mx-auto p-6 bg-transparent shadow-none border-none">
       <CardBody className="p-0">
         <form onSubmit={handleSubmit} className="space-y-10">
           <div>
-            <span className="font-bold mb-2 block uppercase text-center font-lora tracking-[3px]">
+            <span className="font-bold mb-2 block uppercase text-center font-lora tracking-[3px] text-[2rem]">
               Confirmar asistencia
             </span>
-            <span className="m-6 block text-center font-lora tracking-[3px]">
+            <span className="m-6 block text-center font-lora tracking-[3px] text-[1rem]">
               <span className="block whitespace-nowrap">
                 Por favor, confirma tu asistencia
               </span>
@@ -136,7 +136,7 @@ const AttendanceForm = () => {
           <div>
             <label
               htmlFor="name-0"
-              className="block text-sm font-medium text-gray-700 mb-2 "
+              className="block text-sm font-medium text-gray-700 mb-2 text-[1rem] "
             >
               Nombre y Apellido *
             </label>
@@ -176,7 +176,7 @@ const AttendanceForm = () => {
                 color="primary"
                 size="sm"
                 onPress={addAccompanist}
-                className="w-full bg-transparent border-none"
+                className="w-full bg-transparent border-none text-[.95rem]"
               >
                 + Agregar Acompañante
               </Button>
@@ -251,7 +251,7 @@ const AttendanceForm = () => {
           <Button
             type="submit"
             variant="bordered"
-            className="w-full uppercase bg-transparent"
+            className="w-full h-[2.8rem] uppercase bg-transparent text-[1rem]"
             disabled={loading}
             color="primary"
           >
