@@ -41,42 +41,49 @@ const Countdown = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto my-8 flex flex-col items-center">
+    <div className="w-full max-w-6xl mx-auto my-4 sm:my-6 md:my-8 flex flex-col items-center px-4">
       {/* Título principal */}
-      <h2 className="text-[2rem] font-normal text-primary mb-8 text-center font-lora tracking-wider">
+      <h2 className="text-xl sm:text-2xl md:text-[2rem] font-normal text-primary mb-4 sm:mb-6 md:mb-8 text-center font-lora tracking-wider">
         GUARDA LA FECHA
       </h2>
 
       {/* Contador principal */}
-      <div className="flex flex-row gap-32 w-full justify-center items-center">
+      <div className="flex flex-row gap-2 sm:gap-4 md:gap-8 lg:gap-16 xl:gap-32 w-full justify-center items-center px-4">
         {[
           { value: timeLeft.days, label: "DÍAS" },
           { value: timeLeft.hours, label: "HORAS" },
           { value: timeLeft.minutes, label: "MINUTOS" },
         ].map(({ value, label }) => (
-          <div key={label} className="flex flex-col items-center gap-6">
+          <div
+            key={label}
+            className="flex flex-col items-center gap-2 sm:gap-4 md:gap-6"
+          >
             {/* Tarjeta negra con número responsiva */}
             <div
               className="bg-primary text-secondary 
-                w-[10rem] h-[10rem] 
-                sm:w-[14rem] sm:h-[14rem] 
-                md:w-[18rem] md:h-[18rem] 
-                lg:w-[25rem] lg:h-[25rem] 
-                rounded-2xl flex items-center justify-center shadow-2xl border-4 border-primary"
+                w-[4.5rem] h-[4.5rem]
+                xs:w-[6rem] xs:h-[6rem]
+                sm:w-[8rem] sm:h-[8rem] 
+                md:w-[12rem] md:h-[12rem] 
+                lg:w-[18rem] lg:h-[18rem] 
+                xl:w-[25rem] xl:h-[25rem] 
+                rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center shadow-2xl border-2 sm:border-4 border-primary"
             >
               <span
                 className="
-                  text-[4.5rem] 
-                  sm:text-[6rem] 
-                  md:text-[9rem] 
-                  lg:text-[12rem] 
+                  text-[1.5rem]
+                  xs:text-[2rem]
+                  sm:text-[3rem] 
+                  md:text-[6rem] 
+                  lg:text-[9rem] 
+                  xl:text-[12rem] 
                   font-bold font-lora tracking-wider"
               >
                 {formatNumber(value)}
               </span>
             </div>
             {/* Etiqueta */}
-            <span className="text-lg md:text-xl font-semibold text-primary font-lora tracking-wider">
+            <span className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-primary font-lora tracking-wider text-center">
               {label}
             </span>
           </div>
@@ -84,11 +91,11 @@ const Countdown = () => {
       </div>
 
       {/* Fecha del evento */}
-      <div className="mt-8 text-center">
-        <p className="text-xl md:text-2xl font-bold text-primary font-lora tracking-wider">
+      <div className="mt-4 sm:mt-6 md:mt-8 text-center">
+        <p className="text-lg sm:text-xl md:text-2xl font-bold text-primary font-lora tracking-wider">
           19 DE DICIEMBRE, 2025
         </p>
-        <p className="text-lg md:text-xl text-primary/80 font-lora tracking-wider mt-2">
+        <p className="text-base sm:text-lg md:text-xl text-primary/80 font-lora tracking-wider mt-1 sm:mt-2">
           2:00 PM
         </p>
       </div>

@@ -38,19 +38,19 @@ const PhotoCarousel = () => {
   };
 
   return (
-    <div className="w-full h-screen mx-auto flex flex-col items-center justify-center select-none relative">
+    <div className="w-full mx-auto flex flex-col items-center justify-center select-none relative px-2 sm:px-4 py-4 sm:py-6 md:py-8">
       <div
-        className="relative w-full h-[50rem] flex items-center justify-center"
+        className="relative w-full h-[25rem] xs:h-[30rem] sm:h-[35rem] md:h-[40rem] lg:h-[50rem] flex items-center justify-center"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {/* Imagen principal - altura fija de 500px con recorte */}
+        {/* Imagen principal - altura responsiva */}
         <img
           key={images[current]}
           src={images[current]}
           alt={`Foto ${current + 1}`}
-          className="relative z-20 w-full h-[800px] object-cover mx-auto transition-opacity duration-300"
+          className="relative z-20 w-full h-[25rem] xs:h-[30rem] sm:h-[35rem] md:h-[40rem] lg:h-[50rem] xl:h-[800px] object-cover mx-auto transition-opacity duration-300"
           draggable={false}
         />
 

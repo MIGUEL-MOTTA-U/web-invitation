@@ -108,14 +108,17 @@ const AttendanceForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-[45rem] my-6 p-6 bg-transparent shadow-none border-none">
+    <Card className="w-full max-w-[45rem] my-4 sm:my-6 p-3 sm:p-4 md:p-6 bg-transparent shadow-none border-none mx-2 sm:mx-4">
       <CardBody className="p-0">
-        <form onSubmit={handleSubmit} className="space-y-10">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 sm:space-y-8 md:space-y-10"
+        >
           <div>
-            <span className="font-bold mb-2 block uppercase text-center font-lora tracking-[3px] text-[2.5rem]">
+            <span className="font-bold mb-2 block uppercase text-center font-lora tracking-[1px] xs:tracking-[2px] sm:tracking-[3px] text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem]">
               Confirmar asistencia
             </span>
-            <span className="mb-20 mt-5 block text-center font-lora tracking-[3px] text-[1.8rem]">
+            <span className="mb-8 sm:mb-12 md:mb-16 lg:mb-20 mt-3 sm:mt-4 md:mt-5 block text-center font-lora tracking-[1px] xs:tracking-[2px] sm:tracking-[3px] text-base xs:text-lg sm:text-xl md:text-2xl lg:text-[1.8rem]">
               <span className="block whitespace-nowrap">
                 Por favor, confirma tu asistencia
               </span>
@@ -127,23 +130,27 @@ const AttendanceForm = () => {
               onValueChange={(value) =>
                 handleInputChange("confirmed", value === "yes")
               }
-              className="mb-4 flex gap-4 justify-center"
+              className="mb-4 flex flex-col xs:flex-row gap-2 xs:gap-4  items-center"
             >
-              <Radio value="yes">Sí, allí estaré</Radio>
-              <Radio value="no">No podré asistir</Radio>
+              <Radio value="yes" className="text-sm sm:text-base">
+                Sí, allí estaré
+              </Radio>
+              <Radio value="no" className="text-sm sm:text-base">
+                No podré asistir
+              </Radio>
             </RadioGroup>
           </div>
 
           <div>
             <label
               htmlFor="name-0"
-              className="block text-sm font-medium text-gray-700 mb-5 text-[1.5rem] "
+              className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4 md:mb-5 text-lg sm:text-xl md:text-[1.5rem]"
             >
               Nombre y Apellido *
             </label>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {formData.names.map((name, index) => (
-                <div key={nameIds[index]} className="flex gap-2">
+                <div key={nameIds[index]} className="flex gap-1 sm:gap-2">
                   <Input
                     id={index === 0 ? "name-0" : undefined}
                     type="text"
@@ -165,7 +172,7 @@ const AttendanceForm = () => {
                       color="danger"
                       size="sm"
                       onPress={() => removeAccompanist(index)}
-                      className="px-3 min-w-0 bg-transparent border-none"
+                      className="px-2 sm:px-3 min-w-0 bg-transparent border-none text-lg sm:text-xl"
                     >
                       ×
                     </Button>
@@ -178,7 +185,7 @@ const AttendanceForm = () => {
                 color="primary"
                 size="lg"
                 onPress={addAccompanist}
-                className="w-full bg-transparent border-none text-[.95rem] font-bold"
+                className="w-full bg-transparent border-none text-sm sm:text-base md:text-[.95rem] font-bold"
               >
                 + Agregar Acompañante
               </Button>
@@ -253,7 +260,7 @@ const AttendanceForm = () => {
           <Button
             type="submit"
             variant="bordered"
-            className="w-full h-[2.8rem] uppercase bg-transparent text-[1rem]"
+            className="w-full h-[2.5rem] sm:h-[2.8rem] uppercase bg-transparent text-sm sm:text-base md:text-[1rem]"
             disabled={loading}
             color="primary"
           >
