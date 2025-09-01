@@ -108,14 +108,14 @@ const AttendanceForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-lg my-6 mx-auto p-6 bg-transparent shadow-none border-none">
+    <Card className="w-full max-w-[45rem] my-6 p-6 bg-transparent shadow-none border-none">
       <CardBody className="p-0">
         <form onSubmit={handleSubmit} className="space-y-10">
           <div>
-            <span className="font-bold mb-2 block uppercase text-center font-lora tracking-[3px] text-[2rem]">
+            <span className="font-bold mb-2 block uppercase text-center font-lora tracking-[3px] text-[2.5rem]">
               Confirmar asistencia
             </span>
-            <span className="m-6 block text-center font-lora tracking-[3px] text-[1rem]">
+            <span className="mb-20 mt-5 block text-center font-lora tracking-[3px] text-[1.8rem]">
               <span className="block whitespace-nowrap">
                 Por favor, confirma tu asistencia
               </span>
@@ -123,6 +123,7 @@ const AttendanceForm = () => {
             </span>
             <RadioGroup
               value={formData.confirmed ? "yes" : "no"}
+              size="lg"
               onValueChange={(value) =>
                 handleInputChange("confirmed", value === "yes")
               }
@@ -136,7 +137,7 @@ const AttendanceForm = () => {
           <div>
             <label
               htmlFor="name-0"
-              className="block text-sm font-medium text-gray-700 mb-2 text-[1rem] "
+              className="block text-sm font-medium text-gray-700 mb-5 text-[1.5rem] "
             >
               Nombre y Apellido *
             </label>
@@ -146,6 +147,7 @@ const AttendanceForm = () => {
                   <Input
                     id={index === 0 ? "name-0" : undefined}
                     type="text"
+                    size="lg"
                     value={name}
                     onChange={(e) => handleNameChange(index, e.target.value)}
                     placeholder={
@@ -174,9 +176,9 @@ const AttendanceForm = () => {
                 type="button"
                 variant="light"
                 color="primary"
-                size="sm"
+                size="lg"
                 onPress={addAccompanist}
-                className="w-full bg-transparent border-none text-[.95rem]"
+                className="w-full bg-transparent border-none text-[.95rem] font-bold"
               >
                 + Agregar Acompañante
               </Button>
