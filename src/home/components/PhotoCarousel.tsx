@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import "./PhotoCarousel.css";
 
-//import c2 from "../../assets/images/carousel/c2.jpg";
 import c1 from "../../assets/images/carousel/f1.jpg";
 
 const images = [c1]; //, c3, c4, c5, c6, c7, c8, c9];
