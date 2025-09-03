@@ -26,7 +26,7 @@ const BrideGroomImage = () => (
           <img
             src={c3}
             alt="Alexander y Marcela"
-            className="w-full h-full object-cover grayscale"
+            className="w-full h-full object-cover  grayscale"
             style={{ maxHeight: "100%", maxWidth: "100%" }}
           />
           <div className="absolute bottom-0 right-0 translate-x-[.4rem] translate-y-[1.9rem] xs:translate-x-[0.5rem] xs:translate-y-[2.5rem] sm:translate-x-[0.5rem] sm:translate-y-[3.3rem] md:translate-x-[0.6rem] md:translate-y-[5rem] lg:translate-x-[.8rem] lg:translate-y-[5.5rem] xl:translate-x-[1.0rem] xl:translate-y-[7rem] 2xl:translate-x-[2rem] 2xl:translate-y-[9.8rem]">
@@ -67,8 +67,11 @@ const BrideGroomImage = () => (
         </div>
 
         {/* Versículo bíblico */}
-        <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[2rem] text-black tracking-wider font-semibold">
+        <p className="text-sm xs:text-base sm:text-lg mt-[3.5rem] md:text-xl lg:text-2xl xl:text-[2rem] text-black tracking-wider font-semibold">
           ECLESIASTÉS 4:12
+        </p>
+        <p className="text-sm xs:text-base sm:text-lg mt-[.5rem] mb-[.5rem] md:text-xl lg:text-2xl xl:text-[2rem] text-black tracking-wider font-normal">
+          Y si alguno prevaleciere contra uno, dos le resistirán; y cordón de tres dobleces no se rompe pronto
         </p>
       </div>
     </div>
