@@ -85,7 +85,10 @@ const AttendanceForm = () => {
     try {
       // Enviar arreglo de objetos { name, confirmed }
       await submitGuestsArray(
-        validNames.map((name) => ({ name: name.trim(), confirmed: formData.confirmed }))
+        validNames.map((name) => ({
+          name: name.trim(),
+          confirmed: formData.confirmed,
+        }))
       );
 
       // Limpiar formulario después del éxito

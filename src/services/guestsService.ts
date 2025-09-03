@@ -17,7 +17,9 @@ class GuestsService {
   // Crear múltiples invitados simples (solo nombre + confirmado)
   // Accepts either an array of SimpleGuest or the full CreateGuestsBulkRequest shape.
   // Converts to { name, confirmed, companions: SimpleGuest[] } and posts to /guests/bulk
-  async createGuestsBulk(guests: SimpleGuest[] | CreateGuestsBulkRequest): Promise<OutputMessage> {
+  async createGuestsBulk(
+    guests: SimpleGuest[] | CreateGuestsBulkRequest
+  ): Promise<OutputMessage> {
     let payload: CreateGuestsBulkRequest;
 
     if (Array.isArray(guests)) {
@@ -39,7 +41,10 @@ class GuestsService {
   }
 
   // Helper para convertir un string compuesto en múltiples invitados
-  async createGuestNames(names: string[], confirmed: boolean): Promise<OutputMessage> {
+  async createGuestNames(
+    names: string[],
+    confirmed: boolean
+  ): Promise<OutputMessage> {
     const simpleGuests: SimpleGuest[] = names
       .filter((n) => n.trim())
       .map((name) => ({ name: name.trim(), confirmed }));
