@@ -19,9 +19,7 @@ interface FormData {
 }
 
 const AttendanceForm = () => {
-  const { loading, submitGuestForm } = useGuestForm();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [countryCode, _setCountryCode] = useState("+57");
+  const { loading, submitGuestsArray } = useGuestForm();
   const [formData, setFormData] = useState<FormData>({
     names: [""],
     email: "",
@@ -85,14 +83,10 @@ const AttendanceForm = () => {
     }
 
     try {
-      await submitGuestForm({
-        name: validNames.join(", "),
-        email: formData.email,
-        phone: formData.phone,
-        phoneCountryCode: countryCode,
-        message: formData.message || undefined,
-        confirmed: formData.confirmed,
-      });
+      // Enviar arreglo de objetos { name, confirmed }
+      await submitGuestsArray(
+        validNames.map((name) => ({ name: name.trim(), confirmed: formData.confirmed }))
+      );
 
       // Limpiar formulario después del éxito
       setFormData({

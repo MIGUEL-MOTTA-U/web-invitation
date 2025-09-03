@@ -9,13 +9,13 @@ const BrideGroomImage = () => (
         {/* Panel izquierdo - Foto 1 con "19" */}
         <div className="relative overflow-hidden">
           <img
-            src={c1}
+            src={c2}
             alt="Alexander y Marcela"
             className="w-full h-full object-cover grayscale"
             style={{ maxHeight: "100%", maxWidth: "100%" }}
           />
-          <div className="absolute bottom-0 right-0 transform translate-x-[0.5rem] translate-y-[2rem] xs:translate-x-[0.8rem] xs:translate-y-[3rem] sm:translate-x-[1rem] sm:translate-y-[4rem] md:translate-x-[1.2rem] md:translate-y-[6rem] lg:translate-x-[1.5rem] lg:translate-y-[8.5rem]">
-            <span className="text-white text-[4rem] xs:text-[6rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[22rem] font-bold drop-shadow-lg">
+          <div className="absolute bottom-0 right-0 translate-x-[.4rem] translate-y-[1.9rem] xs:translate-x-[0.5rem] xs:translate-y-[2.5rem] sm:translate-x-[0.5rem] sm:translate-y-[3.3rem] md:translate-x-[0.6rem] md:translate-y-[5rem] lg:translate-x-[.8rem] lg:translate-y-[5.5rem] xl:translate-x-[1.0rem] xl:translate-y-[7rem] 2xl:translate-x-[2rem] 2xl:translate-y-[9.8rem]">
+            <span className="text-white text-[5rem] xs:text-[6rem] sm:text-[8rem] md:text-[12rem] lg:text-[13rem] 2xl:text-[24rem] xl:text-[18rem] font-bold drop-shadow-lg">
               19
             </span>
           </div>
@@ -24,13 +24,13 @@ const BrideGroomImage = () => (
         {/* Panel central - Foto 2 con "12" */}
         <div className="relative overflow-hidden">
           <img
-            src={c2}
+            src={c3}
             alt="Alexander y Marcela"
             className="w-full h-full object-cover grayscale"
             style={{ maxHeight: "100%", maxWidth: "100%" }}
           />
-          <div className="absolute bottom-0 right-0 transform translate-x-[0.5rem] translate-y-[2rem] xs:translate-x-[0.8rem] xs:translate-y-[3rem] sm:translate-x-[1rem] sm:translate-y-[4rem] md:translate-x-[1.2rem] md:translate-y-[6rem] lg:translate-x-[1.5rem] lg:translate-y-[8.5rem]">
-            <span className="text-white text-[4rem] xs:text-[6rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[22rem] font-bold drop-shadow-lg">
+          <div className="absolute bottom-0 right-0 translate-x-[.4rem] translate-y-[1.9rem] xs:translate-x-[0.5rem] xs:translate-y-[2.5rem] sm:translate-x-[0.5rem] sm:translate-y-[3.3rem] md:translate-x-[0.6rem] md:translate-y-[5rem] lg:translate-x-[.8rem] lg:translate-y-[5.5rem] xl:translate-x-[1.0rem] xl:translate-y-[7rem] 2xl:translate-x-[2rem] 2xl:translate-y-[9.8rem]">
+            <span className="text-white text-[5rem] xs:text-[6rem] sm:text-[8rem] md:text-[12rem] lg:text-[13rem] 2xl:text-[24rem] xl:text-[18rem] font-bold drop-shadow-lg">
               12
             </span>
           </div>
@@ -39,13 +39,13 @@ const BrideGroomImage = () => (
         {/* Panel derecho - Foto 3 con "25" */}
         <div className="relative overflow-hidden">
           <img
-            src={c3}
+            src={c1}
             alt="Alexander y Marcela"
             className="w-full h-full object-cover grayscale"
             style={{ maxHeight: "100%", maxWidth: "100%" }}
           />
-          <div className="absolute bottom-0 right-0 transform translate-x-[0.5rem] translate-y-[2rem] xs:translate-x-[0.8rem] xs:translate-y-[3rem] sm:translate-x-[1rem] sm:translate-y-[4rem] md:translate-x-[1.2rem] md:translate-y-[6rem] lg:translate-x-[1.5rem] lg:translate-y-[8.5rem]">
-            <span className="text-white text-[4rem] xs:text-[6rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[22rem] font-bold drop-shadow-lg">
+          <div className="absolute bottom-0 right-0 translate-x-[.4rem] translate-y-[1.9rem] xs:translate-x-[0.5rem] xs:translate-y-[2.5rem] sm:translate-x-[0.5rem] sm:translate-y-[3.3rem] md:translate-x-[0.6rem] md:translate-y-[5rem] lg:translate-x-[.8rem] lg:translate-y-[5.5rem] xl:translate-x-[1.0rem] xl:translate-y-[7rem] 2xl:translate-x-[2rem] 2xl:translate-y-[9.8rem]">
+            <span className="text-white text-[5rem] xs:text-[6rem] sm:text-[8rem] md:text-[12rem] lg:text-[13rem] 2xl:text-[24rem] xl:text-[18rem] font-bold drop-shadow-lg">
               25
             </span>
           </div>
