@@ -71,7 +71,8 @@ const BrideGroomImage = () => (
           ECLESIASTÉS 4:12
         </p>
         <p className="text-sm xs:text-base sm:text-lg mt-[.5rem] mb-[.5rem] md:text-xl lg:text-2xl xl:text-[2rem] text-black tracking-wider font-normal">
-          Y si alguno prevaleciere contra uno, dos le resistirán; y cordón de tres dobleces no se rompe pronto
+          Y si alguno prevaleciere contra uno, dos le resistirán; y cordón de
+          tres dobleces no se rompe pronto
         </p>
       </div>
     </div>
