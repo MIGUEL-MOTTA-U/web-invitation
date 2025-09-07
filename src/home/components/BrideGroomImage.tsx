@@ -24,7 +24,7 @@ const BrideGroomImage = () => (
         {/* Panel central - Foto 2 con "12" */}
         <div className="relative overflow-hidden">
           <img
-            src={c3}
+            src={c1}
             alt="Alexander y Marcela"
             className="w-full h-full object-cover  grayscale"
             style={{ maxHeight: "100%", maxWidth: "100%" }}
@@ -39,7 +39,7 @@ const BrideGroomImage = () => (
         {/* Panel derecho - Foto 3 con "25" */}
         <div className="relative overflow-hidden">
           <img
-            src={c1}
+            src={c3}
             alt="Alexander y Marcela"
             className="w-full h-full object-cover grayscale"
             style={{ maxHeight: "100%", maxWidth: "100%" }}
