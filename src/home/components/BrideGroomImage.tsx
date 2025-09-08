@@ -53,21 +53,21 @@ const BrideGroomImage = () => (
       </div>
 
       {/* Sección inferior - Banner blanco con texto */}
-      <div className="bg-transparent p-3 sm:p-4 md:p-6 text-center">
+      <div className="bg-transparent sm:p-4 md:p-6 text-center">
         {/* Título principal */}
-        <h1 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem] font-normal text-black mb-2 sm:mb-3 md:mb-4 tracking-wider">
+        <h1 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem] font-normal text-black mb-4 tracking-wider">
           BIENVENIDOS A NUESTRA BODA
         </h1>
 
         {/* Nombres con fuente Liana */}
-        <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3 md:mb-4 font-medium text-[2rem] xs:text-[3rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[8rem]">
+        <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-3 md:gap-4 my-10 font-medium text-[2rem] xs:text-[3rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[8rem]">
           <span className="font-liana text-black">Alexander</span>
           <span className="font-liana text-black">&</span>
           <span className="font-liana text-black">Marcela</span>
         </div>
 
         {/* Versículo bíblico */}
-        <p className="text-sm xs:text-base sm:text-lg mt-[3.5rem] md:text-xl lg:text-2xl xl:text-[2rem] text-black tracking-wider font-semibold">
+        <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[2rem] text-black tracking-wider font-semibold mt-4">
           ECLESIASTÉS 4:12
         </p>
         <p className="text-sm xs:text-base sm:text-lg mt-[.5rem] mb-[.5rem] md:text-xl lg:text-2xl xl:text-[2rem] text-black tracking-wider font-normal">

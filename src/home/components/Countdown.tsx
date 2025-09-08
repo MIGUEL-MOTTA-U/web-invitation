@@ -41,7 +41,7 @@ const Countdown = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto my-4 sm:my-6 md:my-8 flex flex-col items-center px-4">
+    <div className="w-full max-w-6xl mx-auto mt-4 sm:mt-6 md:mt-8 flex flex-col items-center px-4">
       {/* Título principal */}
       <h2 className="text-xl sm:text-2xl md:text-[2rem] font-normal text-primary mb-4 sm:mb-6 md:mb-8 text-center font-lora tracking-wider">
         GUARDA LA FECHA
@@ -91,13 +91,15 @@ const Countdown = () => {
       </div>
 
       {/* Fecha del evento */}
-      <div className="mt-4 sm:mt-6 md:mt-8 text-center">
-        <p className="text-lg sm:text-xl md:text-2xl font-bold text-primary font-lora tracking-wider">
-          19 DE DICIEMBRE, 2025
+      <div className="flex flex-col items-center text-center mt-8 mb-8 sm:mt-10 sm:mb-10 md:mt-12 md:mb-12">
+        <p className="text-1xl xs:text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-primary font-lora tracking-wider mt-8 mb-8">
+          19 DE DICIEMBRE 2025
         </p>
-        <p className="text-base sm:text-lg md:text-xl text-primary/80 font-lora tracking-wider mt-1 sm:mt-2">
+        {/*
+          <p className="text-base sm:text-lg md:text-xl text-primary/80 font-lora tracking-wider mt-1 sm:mt-2">
           2:00 PM
         </p>
+          */}
       </div>
     </div>
   );
