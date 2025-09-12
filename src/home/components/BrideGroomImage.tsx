@@ -60,7 +60,7 @@ const BrideGroomImage = () => (
         </h1>
 
         {/* Nombres con fuente Liana */}
-        <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-3 md:gap-4 my-10 font-medium text-[2rem] xs:text-[3rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[8rem]">
+        <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-3 md:gap-4 my-5 xl:my-[2.5rem] font-medium text-[2rem] xs:text-[3rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[8rem]">
           <span className="font-liana text-black">Alexander</span>
           <span className="font-liana text-black">&</span>
           <span className="font-liana text-black">Marcela</span>
