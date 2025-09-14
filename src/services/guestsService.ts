@@ -1,4 +1,5 @@
 import type {
+  AllGuestsResponse,
   CreateGuestRequest,
   CreateGuestsBulkRequest,
   GuestDTO,
@@ -54,6 +55,12 @@ class GuestsService {
   // Obtener todos los invitados (si tu backend lo soporta)
   async getAllGuests(): Promise<GuestDTO[]> {
     const response = await api.get("/guests");
+    return response.data;
+  }
+
+  // Obtener todos los invitados con estadísticas y companeros
+  async getAllGuestsWithStats(): Promise<AllGuestsResponse> {
+    const response = await api.get("/guests/bulk");
     return response.data;
   }
 

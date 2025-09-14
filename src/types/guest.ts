@@ -39,3 +39,39 @@ export interface OutputMessage {
     userId: string;
   };
 }
+
+// New types for guests administration page
+export interface Companion {
+  id: string;
+  name: string;
+  confirmed: boolean;
+}
+
+export interface GuestWithCompanions {
+  id: string;
+  name: string;
+  confirmed: boolean;
+  nCompanions: number;
+  companions: Companion[];
+}
+
+export interface GuestStatistics {
+  totalGuests: number;
+  totalConfirmedGuests: number;
+  totalUnconfirmedGuests: number;
+  totalCompanions: number;
+  totalConfirmedCompanions: number;
+  totalUnconfirmedCompanions: number;
+}
+
+export interface AllGuestsResponse {
+  message: string;
+  status: number;
+  type: string;
+  payload: {
+    allGuests: GuestWithCompanions[];
+    confirmedGuests: GuestWithCompanions[];
+    unconfirmedGuests: GuestWithCompanions[];
+    statistics: GuestStatistics;
+  };
+}
