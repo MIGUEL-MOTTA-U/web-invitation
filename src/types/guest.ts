@@ -55,6 +55,51 @@ export interface GuestWithCompanions {
   companions: Companion[];
 }
 
+// New types for the updated API with paginated people
+export interface Person {
+  id: string;
+  name: string;
+  confirmed: boolean;
+  type: "guest" | "companion";
+  guestId?: string; // Only for companions
+  guestName?: string; // Only for companions
+}
+
+export interface UpdatedGuestStatistics {
+  pageGuests: number;
+  pageCompanions: number;
+  pageConfirmedGuests: number;
+  pageUnconfirmedGuests: number;
+  pageConfirmedCompanions: number;
+  pageUnconfirmedCompanions: number;
+  pageConfirmedPeople: number;
+  pageUnconfirmedPeople: number;
+  totalPeople: number;
+  totalGuests: number;
+  totalCompanions: number;
+  totalConfirmedGuests: number;
+  totalUnconfirmedGuests: number;
+  totalConfirmedCompanions: number;
+  totalUnconfirmedCompanions: number;
+  totalConfirmedPeople: number;
+  totalUnconfirmedPeople: number;
+}
+
+export interface AllPeopleResponse {
+  message: string;
+  status: number;
+  type: string;
+  payload: {
+    people: Person[];
+    guests: Person[];
+    companions: Person[];
+    confirmedPeople: Person[];
+    unconfirmedPeople: Person[];
+    pagination: Pagination;
+    statistics: UpdatedGuestStatistics;
+  };
+}
+
 export interface GuestStatistics {
   totalGuests: number;
   totalConfirmedGuests: number;
@@ -62,6 +107,16 @@ export interface GuestStatistics {
   totalCompanions: number;
   totalConfirmedCompanions: number;
   totalUnconfirmedCompanions: number;
+  globalTotalGuests?: number;
+}
+
+export interface Pagination {
+  currentPage: number;
+  pageSize: number;
+  totalItems: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
 }
 
 export interface AllGuestsResponse {
@@ -72,6 +127,7 @@ export interface AllGuestsResponse {
     allGuests: GuestWithCompanions[];
     confirmedGuests: GuestWithCompanions[];
     unconfirmedGuests: GuestWithCompanions[];
+    pagination: Pagination;
     statistics: GuestStatistics;
   };
 }

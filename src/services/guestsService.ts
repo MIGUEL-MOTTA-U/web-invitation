@@ -1,5 +1,6 @@
 import type {
   AllGuestsResponse,
+  AllPeopleResponse,
   CreateGuestRequest,
   CreateGuestsBulkRequest,
   GuestDTO,
@@ -59,8 +60,24 @@ class GuestsService {
   }
 
   // Obtener todos los invitados con estadísticas y companeros
-  async getAllGuestsWithStats(): Promise<AllGuestsResponse> {
-    const response = await api.get("/guests/bulk");
+  async getAllGuestsWithStats(
+    page = 1,
+    pageSize = 10
+  ): Promise<AllGuestsResponse> {
+    const response = await api.get(
+      `/guests/bulk?page=${page}&size=${pageSize}`
+    );
+    return response.data;
+  }
+
+  // Obtener todas las personas (invitados + acompañantes) con paginación
+  async getAllPeopleWithStats(
+    page = 1,
+    pageSize = 10
+  ): Promise<AllPeopleResponse> {
+    const response = await api.get(
+      `/guests/bulk?page=${page}&size=${pageSize}`
+    );
     return response.data;
   }
 

@@ -5,6 +5,7 @@ import {
   CardHeader,
   Chip,
   Divider,
+  Pagination,
   Spinner,
   Table,
   TableBody,
@@ -15,19 +16,21 @@ import {
 } from "@heroui/react";
 import { useCallback, useEffect, useState } from "react";
 import { guestsService } from "../services/guestsService";
-import type { AllGuestsResponse } from "../types/guest";
+import type { AllPeopleResponse } from "../types/guest";
 
 const GuestsPage = () => {
-  const [guestsData, setGuestsData] = useState<AllGuestsResponse | null>(null);
+  const [guestsData, setGuestsData] = useState<AllPeopleResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [expandedGuests, setExpandedGuests] = useState<Set<string>>(new Set());
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(10);
 
-  const fetchGuestsData = useCallback(async () => {
+  const fetchGuestsData = useCallback(async (page = 1, size = 10) => {
     try {
       setLoading(true);
       setError(null);
-      const data = await guestsService.getAllGuestsWithStats();
+      const data = await guestsService.getAllPeopleWithStats(page, size);
       setGuestsData(data);
     } catch (err) {
       setError("Error al cargar los datos de invitados");
@@ -38,8 +41,12 @@ const GuestsPage = () => {
   }, []);
 
   useEffect(() => {
-    fetchGuestsData();
-  }, [fetchGuestsData]);
+    fetchGuestsData(currentPage, pageSize);
+  }, [fetchGuestsData, currentPage, pageSize]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   const toggleGuest = (guestId: string) => {
     const newExpanded = new Set(expandedGuests);
@@ -51,43 +58,78 @@ const GuestsPage = () => {
     setExpandedGuests(newExpanded);
   };
 
-  // Tabla general de todos los invitados y acompañantes
+  const downloadAllPersonsCSV = async () => {
+    try {
+      const allData = await guestsService.getAllPeopleWithStats(1, 300);
+
+      if (!allData?.payload.people) {
+        console.error("No hay datos para descargar");
+        return;
+      }
+
+      const headers = ["Nombre", "Tipo", "Confirmado", "Invitado Principal"];
+      const csvContent = [
+        headers.join(","),
+        ...allData.payload.people.map((person) =>
+          [
+            `"${person.name}"`,
+            person.type === "guest" ? "Invitado" : "Acompañante",
+            person.confirmed ? "Confirmado" : "No confirmado",
+            person.type === "companion" ? `"${person.guestName || ""}"` : "-",
+          ].join(",")
+        ),
+      ].join("\n");
+
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute(
+          "download",
+          `Invitados_${new Date().toISOString().split("T")[0]}.csv`
+        );
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    } catch (error) {
+      console.error("Error al descargar el archivo:", error);
+    }
+  };
+
   const renderAllPersonsTable = () => {
-    if (!guestsData?.payload.allGuests) return null;
+    if (!guestsData?.payload.people) return null;
 
-    const allPersons: Array<{
-      id: string;
-      name: string;
-      confirmed: boolean;
-      type: "guest" | "companion";
-      guestName?: string;
-    }> = [];
-
-    // Agregar invitados principales
-    guestsData.payload.allGuests.forEach((guest) => {
-      allPersons.push({
-        id: guest.id,
-        name: guest.name,
-        confirmed: guest.confirmed,
-        type: "guest",
-      });
-
-      // Agregar acompañantes
-      guest.companions.forEach((companion) => {
-        allPersons.push({
-          id: companion.id,
-          name: companion.name,
-          confirmed: companion.confirmed,
-          type: "companion",
-          guestName: guest.name,
-        });
-      });
-    });
+    const pagination = guestsData.payload.pagination;
 
     return (
       <Card className="mb-6">
-        <CardHeader>
-          <h3 className="text-xl font-semibold">Todas las Personas</h3>
+        <CardHeader className="flex flex-col gap-2">
+          <div className="flex justify-between items-center w-full">
+            <h3 className="text-xl font-semibold">Todas las Personas</h3>
+            <div className="flex items-center gap-3">
+              <Button
+                color="secondary"
+                variant="flat"
+                size="sm"
+                onPress={downloadAllPersonsCSV}
+              >
+                📥 Descargar CSV
+              </Button>
+              <div className="text-sm text-gray-600">
+                Mostrando {guestsData.payload.people.length} personas de la
+                página {pagination.currentPage} de {pagination.totalPages}
+              </div>
+            </div>
+          </div>
+          {pagination.totalItems > 0 && (
+            <div className="text-sm text-gray-500">
+              Total global: {guestsData.payload.statistics.totalPeople} personas
+            </div>
+          )}
         </CardHeader>
         <CardBody>
           <Table aria-label="Todas las personas">
@@ -98,7 +140,7 @@ const GuestsPage = () => {
               <TableColumn>INVITADO PRINCIPAL</TableColumn>
             </TableHeader>
             <TableBody>
-              {allPersons.map((person) => (
+              {guestsData.payload.people.map((person) => (
                 <TableRow key={person.id}>
                   <TableCell className="font-medium">{person.name}</TableCell>
                   <TableCell>
@@ -126,14 +168,36 @@ const GuestsPage = () => {
               ))}
             </TableBody>
           </Table>
+
+          {pagination && pagination.totalPages > 1 && (
+            <div className="flex justify-center mt-4">
+              <Pagination
+                total={pagination.totalPages}
+                page={pagination.currentPage}
+                onChange={handlePageChange}
+                showControls
+                showShadow
+                color="primary"
+              />
+            </div>
+          )}
         </CardBody>
       </Card>
     );
   };
 
-  // Tabla de invitados con detalles expandibles (accordion personalizado)
   const renderGuestsWithDetails = () => {
-    if (!guestsData?.payload.allGuests) return null;
+    if (!guestsData?.payload.guests) return null;
+    const guestsWithCompanions = guestsData.payload.guests.map((guest) => {
+      const companions = guestsData.payload.companions.filter(
+        (companion) => companion.guestId === guest.id
+      );
+      return {
+        ...guest,
+        nCompanions: companions.length,
+        companions: companions,
+      };
+    });
 
     return (
       <Card className="mb-6">
@@ -142,7 +206,7 @@ const GuestsPage = () => {
         </CardHeader>
         <CardBody>
           <div className="space-y-4">
-            {guestsData.payload.allGuests.map((guest) => {
+            {guestsWithCompanions.map((guest) => {
               const isExpanded = expandedGuests.has(guest.id);
 
               return (
@@ -183,7 +247,6 @@ const GuestsPage = () => {
                     <CardBody className="pt-0">
                       <Divider className="mb-4" />
 
-                      {/* Información básica del invitado */}
                       <div className="mb-6 p-4 bg-gray-50 rounded-lg">
                         <h4 className="font-semibold mb-3 text-gray-800">
                           Información del Invitado
@@ -214,7 +277,6 @@ const GuestsPage = () => {
                         </div>
                       </div>
 
-                      {/* Lista de acompañantes */}
                       {guest.companions.length > 0 ? (
                         <div>
                           <h4 className="font-semibold mb-4 text-gray-800">
@@ -276,106 +338,88 @@ const GuestsPage = () => {
   const renderStatistics = () => {
     if (!guestsData?.payload) return null;
 
-    // Usar las estadísticas de la API si están disponibles, sino calcularlas manualmente
-    const stats = guestsData.payload.statistics || calculateStatistics();
-
-    // Debug: mostrar en consola los datos recibidos
-    console.log("Datos de estadísticas:", guestsData.payload.statistics);
-    console.log("Estadísticas calculadas:", stats);
+    const stats = guestsData.payload.statistics;
+    if (!stats) return null;
 
     return (
       <Card className="mb-6">
         <CardHeader>
-          <h3 className="text-xl font-semibold">Estadísticas</h3>
+          <div className="flex justify-between items-center w-full">
+            <h3 className="text-xl font-semibold">Estadísticas</h3>
+            <div className="text-sm text-gray-600">
+              Página {guestsData.payload.pagination.currentPage} de{" "}
+              {guestsData.payload.pagination.totalPages}
+            </div>
+          </div>
         </CardHeader>
         <CardBody>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">
+                {stats.totalPeople}
+              </div>
+              <div className="text-sm text-gray-600">Total Global Personas</div>
+            </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">
                 {stats.totalGuests}
               </div>
-              <div className="text-sm text-gray-600">Total Invitados</div>
+              <div className="text-sm text-gray-600">
+                Total Global Invitados
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">
+                {stats.pageGuests}
+              </div>
+              <div className="text-sm text-gray-600">
+                Invitados (Esta página)
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-primary">
+                {stats.pageCompanions}
+              </div>
+              <div className="text-sm text-gray-600">
+                Acompañantes (Esta página)
+              </div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-success">
                 {stats.totalConfirmedGuests}
               </div>
-              <div className="text-sm text-gray-600">Confirmados</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-danger">
-                {stats.totalUnconfirmedGuests}
+              <div className="text-sm text-gray-600">
+                Total Invitados Confirmados
               </div>
-              <div className="text-sm text-gray-600">No Confirmados</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-primary">
-                {stats.totalCompanions}
-              </div>
-              <div className="text-sm text-gray-600">Total Acompañantes</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-success">
                 {stats.totalConfirmedCompanions}
               </div>
               <div className="text-sm text-gray-600">
-                Acompañantes Confirmados
+                Total Acompañantes Confirmados
               </div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-warning">
-                {stats.totalUnconfirmedCompanions}
+              <div className="text-2xl font-bold text-success">
+                {stats.pageConfirmedPeople}
               </div>
               <div className="text-sm text-gray-600">
-                Acompañantes No Confirmados
+                Confirmados (Esta página)
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-danger">
+                {stats.pageUnconfirmedPeople}
+              </div>
+              <div className="text-sm text-gray-600">
+                No Confirmados (Esta página)
               </div>
             </div>
           </div>
         </CardBody>
       </Card>
     );
-  };
-
-  // Función para calcular estadísticas manualmente como respaldo
-  const calculateStatistics = () => {
-    if (!guestsData?.payload.allGuests) {
-      return {
-        totalGuests: 0,
-        totalConfirmedGuests: 0,
-        totalUnconfirmedGuests: 0,
-        totalCompanions: 0,
-        totalConfirmedCompanions: 0,
-        totalUnconfirmedCompanions: 0,
-      };
-    }
-
-    const guests = guestsData.payload.allGuests;
-    let totalCompanions = 0;
-    let totalConfirmedCompanions = 0;
-    let totalUnconfirmedCompanions = 0;
-
-    guests.forEach((guest) => {
-      totalCompanions += guest.companions.length;
-      guest.companions.forEach((companion) => {
-        if (companion.confirmed) {
-          totalConfirmedCompanions++;
-        } else {
-          totalUnconfirmedCompanions++;
-        }
-      });
-    });
-
-    const confirmedGuests = guests.filter((guest) => guest.confirmed).length;
-    const unconfirmedGuests = guests.filter((guest) => !guest.confirmed).length;
-
-    return {
-      totalGuests: guests.length,
-      totalConfirmedGuests: confirmedGuests,
-      totalUnconfirmedGuests: unconfirmedGuests,
-      totalCompanions,
-      totalConfirmedCompanions,
-      totalUnconfirmedCompanions,
-    };
   };
 
   if (loading) {
@@ -390,7 +434,10 @@ const GuestsPage = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4">
         <p className="text-danger text-lg">{error}</p>
-        <Button color="primary" onPress={fetchGuestsData}>
+        <Button
+          color="primary"
+          onPress={() => fetchGuestsData(currentPage, pageSize)}
+        >
           Reintentar
         </Button>
       </div>
@@ -417,7 +464,7 @@ const GuestsPage = () => {
           </p>
           <Button
             color="primary"
-            onPress={fetchGuestsData}
+            onPress={() => fetchGuestsData(currentPage, pageSize)}
             isLoading={loading}
             disabled={loading}
           >
@@ -426,13 +473,10 @@ const GuestsPage = () => {
           <Divider className="my-4" />
         </div>
 
-        {/* Estadísticas */}
         {renderStatistics()}
 
-        {/* Tabla de todas las personas */}
         {renderAllPersonsTable()}
 
-        {/* Tabla de invitados con detalles expandibles */}
         {renderGuestsWithDetails()}
       </div>
     </div>
