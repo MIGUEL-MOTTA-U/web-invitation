@@ -24,9 +24,9 @@ const GuestsPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [expandedGuests, setExpandedGuests] = useState<Set<string>>(new Set());
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(10);
+  const [pageSize] = useState(20);
 
-  const fetchGuestsData = useCallback(async (page = 1, size = 10) => {
+  const fetchGuestsData = useCallback(async (page = 1, size = 20) => {
     try {
       setLoading(true);
       setError(null);
