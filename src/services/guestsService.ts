@@ -62,7 +62,7 @@ class GuestsService {
   // Obtener todos los invitados con estadísticas y companeros
   async getAllGuestsWithStats(
     page = 1,
-    pageSize = 20
+    pageSize = 8
   ): Promise<AllGuestsResponse> {
     const response = await api.get(
       `/guests/bulk?page=${page}&size=${pageSize}`
@@ -73,7 +73,7 @@ class GuestsService {
   // Obtener todas las personas (invitados + acompañantes) con paginación
   async getAllPeopleWithStats(
     page = 1,
-    pageSize = 20
+    pageSize = 8
   ): Promise<AllPeopleResponse> {
     const response = await api.get(
       `/guests/bulk?page=${page}&size=${pageSize}`
