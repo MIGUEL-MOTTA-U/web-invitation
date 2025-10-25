@@ -1,11 +1,20 @@
 import {
   AttendanceForm,
   BrideGroomImage,
+  ConfirmationForm,
   Countdown,
+  DressCode,
+  GiftSuggestion,
   PhotoCarousel,
 } from "./components";
 
-const WeddingInvitation = () => {
+interface WeddingInvitationProps {
+  showFullForm?: boolean;
+}
+
+const WeddingInvitation = ({
+  showFullForm = false,
+}: WeddingInvitationProps) => {
   return (
     <div className="relative flex flex-col items-center w-full min-h-screen p-4">
       {/* Fondo de pantalla con imagen */}
@@ -28,9 +37,10 @@ const WeddingInvitation = () => {
         {/* <Timeline />*/}
         {/*<AddToCalendar /> */}
         {/* <Location />*/}
-        {/* <DressCode />*/}
+        <DressCode />
+        <GiftSuggestion />
         <PhotoCarousel />
-        <AttendanceForm />
+        {showFullForm ? <ConfirmationForm /> : <AttendanceForm />}
       </div>
     </div>
   );

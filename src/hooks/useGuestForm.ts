@@ -10,6 +10,7 @@ export const useGuestForm = () => {
     setLoading(true);
 
     try {
+      // El servicio enviará el DTO sin el id (el backend lo asigna)
       const response = await guestsService.createGuest(guestData);
       toast.success("¡Invitación enviada exitosamente!");
       return response;

@@ -13,7 +13,7 @@ export interface CreateGuestRequest {
   email: string;
   phone: string;
   phoneCountryCode: string;
-  message?: string;
+  message?: string | null;
   confirmed: boolean;
 }
 
