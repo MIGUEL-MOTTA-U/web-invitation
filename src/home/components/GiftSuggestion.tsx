@@ -4,9 +4,11 @@ import letterEnvelope from "../../assets/images/letter_envelope.png";
 const GiftSuggestion = () => {
   return (
     <div className="w-full max-w-[45rem] my-6 mx-2 sm:mx-4">
-      {/* Título fuera del card - mismo estilo que Alexander & Marcela */}
-      <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 font-medium text-[2rem] xs:text-[3rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[8rem]">
-        <span className="font-liana text-black">Sugerencia de Regalos</span>
+      {/* Título fuera del card */}
+      <div className="flex items-center justify-center mb-4 sm:mb-6">
+        <span className="font-liana text-black text-center text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium">
+          Detalle para los novios
+        </span>
       </div>
 
       {/* Card con fondo blanco */}

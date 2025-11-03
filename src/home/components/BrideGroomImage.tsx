@@ -1,6 +1,6 @@
-import c1 from "../../assets/images/carousel/c1.jpg";
-import c2 from "../../assets/images/carousel/c2.jpg";
-import c3 from "../../assets/images/carousel/c3.jpg";
+import f1 from "../../assets/images/carousel/f1.jpg";
+import f2 from "../../assets/images/carousel/f2.jpg";
+import g4 from "../../assets/images/carousel/g4.jpg";
 
 const BrideGroomImage = () => (
   <div className="w-full mx-auto flex flex-col items-center justify-center select-none relative mb-8 sm:mb-12 md:mb-16 px-2 sm:px-4">
@@ -9,9 +9,9 @@ const BrideGroomImage = () => (
         {/* Panel izquierdo - Foto 1 con "19" */}
         <div className="relative overflow-hidden">
           <img
-            src={c2}
+            src={f2}
             alt="Alexander y Marcela"
-            className="w-full h-full object-cover grayscale"
+            className="w-full h-full object-cover "
             style={{ maxHeight: "100%", maxWidth: "100%" }}
           />
           <div className="absolute bottom-0 right-0 translate-x-[.4rem] translate-y-[1.9rem] xs:translate-x-[0.5rem] xs:translate-y-[2.5rem] sm:translate-x-[0.5rem] sm:translate-y-[3.3rem] md:translate-x-[0.6rem] md:translate-y-[5rem] lg:translate-x-[.8rem] lg:translate-y-[5.5rem] xl:translate-x-[1.0rem] xl:translate-y-[7rem] 2xl:translate-x-[2rem] 2xl:translate-y-[9.8rem]">
@@ -24,9 +24,9 @@ const BrideGroomImage = () => (
         {/* Panel central - Foto 2 con "12" */}
         <div className="relative overflow-hidden">
           <img
-            src={c1}
+            src={f1}
             alt="Alexander y Marcela"
-            className="w-full h-full object-cover  grayscale"
+            className="w-full h-full object-cover  "
             style={{ maxHeight: "100%", maxWidth: "100%" }}
           />
           <div className="absolute bottom-0 right-0 translate-x-[.4rem] translate-y-[1.9rem] xs:translate-x-[0.5rem] xs:translate-y-[2.5rem] sm:translate-x-[0.5rem] sm:translate-y-[3.3rem] md:translate-x-[0.6rem] md:translate-y-[5rem] lg:translate-x-[.8rem] lg:translate-y-[5.5rem] xl:translate-x-[1.0rem] xl:translate-y-[7rem] 2xl:translate-x-[2rem] 2xl:translate-y-[9.8rem]">
@@ -39,9 +39,9 @@ const BrideGroomImage = () => (
         {/* Panel derecho - Foto 3 con "25" */}
         <div className="relative overflow-hidden">
           <img
-            src={c3}
+            src={g4}
             alt="Alexander y Marcela"
-            className="w-full h-full object-cover grayscale"
+            className="w-full h-full object-cover "
             style={{ maxHeight: "100%", maxWidth: "100%" }}
           />
           <div className="absolute bottom-0 right-0 translate-x-[.4rem] translate-y-[1.9rem] xs:translate-x-[0.5rem] xs:translate-y-[2.5rem] sm:translate-x-[0.5rem] sm:translate-y-[3.3rem] md:translate-x-[0.6rem] md:translate-y-[5rem] lg:translate-x-[.8rem] lg:translate-y-[5.5rem] xl:translate-x-[1.0rem] xl:translate-y-[7rem] 2xl:translate-x-[2rem] 2xl:translate-y-[9.8rem]">

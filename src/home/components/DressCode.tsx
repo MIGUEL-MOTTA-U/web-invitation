@@ -1,84 +1,90 @@
 import { Button, Card, CardBody } from "@heroui/react";
+import { IoMan, IoWoman } from "react-icons/io5";
 
 const DressCode = () => {
-  // Colores a evitar
-  const colorsToAvoid = [
-    { name: "Blanco", hex: "#FFFFFF", border: true },
-    { name: "Beige", hex: "#F5F5DC" },
-    { name: "Negro", hex: "#000000" },
-  ];
-
   return (
     <Card className="w-full max-w-[45rem] my-6 mx-2 sm:mx-4 p-4 sm:p-6 md:p-8 bg-white shadow-lg">
       <CardBody className="flex flex-col items-center gap-6">
         {/* Título principal */}
         <h2 className="font-bold text-center uppercase font-lora tracking-[2px] sm:tracking-[3px] text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-          Vestimenta Formal
+          Código de Vestuario
         </h2>
 
-        {/* Mensaje sobre colores */}
-        <p className="text-center font-lora text-base sm:text-lg md:text-xl lg:text-2xl px-2">
-          Les pedimos de favor a los invitados evitar estos colores:
+        {/* Subtítulo */}
+        <p className="text-center font-lora text-lg sm:text-xl md:text-2xl font-semibold text-gray-800">
+          Formal de Gala
         </p>
 
-        {/* Paleta de colores a evitar */}
-        <div className="flex gap-4 sm:gap-6 justify-center items-center flex-wrap">
-          {colorsToAvoid.map((color) => (
-            <div key={color.name} className="flex flex-col items-center gap-2">
-              <div
-                className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full shadow-md ${
-                  color.border ? "border-2 border-gray-300" : ""
-                }`}
-                style={{ backgroundColor: color.hex }}
-              />
-              <span className="text-sm sm:text-base md:text-lg font-medium">
-                {color.name}
-              </span>
-            </div>
-          ))}
+        {/* Separador */}
+        <div className="w-full border-t border-gray-200 my-2" />
+
+        {/* Sección Damas */}
+        <div className="flex flex-col items-center gap-4 w-full">
+          <div className="flex flex-col items-center gap-2">
+            {/* Icono Dama */}
+            <IoWoman
+              className="w-12 h-12 sm:w-16 sm:h-16 text-[#08554c]"
+              aria-label="Vestimenta para damas"
+            />
+            <h3 className="font-lora text-base sm:text-lg md:text-xl font-semibold text-gray-800">
+              Damas
+            </h3>
+          </div>
+
+          <p className="text-center font-lora text-sm sm:text-base md:text-lg px-4 leading-relaxed text-gray-700">
+            Vestido largo de fiesta en el tono que más las haga brillar, con
+            excepción del blanco y del verde esmeralda — el color distintivo de
+            nuestras damas de honor{" "}
+            <span role="img" aria-label="corazón verde">
+              💚
+            </span>
+          </p>
+
+          <Button
+            type="button"
+            variant="solid"
+            size="lg"
+            as="a"
+            href="https://pin.it/6di4SwXvz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#08554c] hover:bg-[#064539] text-white min-w-[140px] sm:min-w-[160px] text-sm sm:text-base transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Ver Más
+          </Button>
         </div>
 
         {/* Separador */}
         <div className="w-full border-t border-gray-200 my-2" />
 
-        {/* Texto de inspiración */}
-        <p className="text-center font-lora text-base sm:text-lg md:text-xl px-2 mb-2">
-          Inspírate con estas opciones de colores permitidos:
-        </p>
+        {/* Sección Caballeros */}
+        <div className="flex flex-col items-center gap-4 w-full">
+          <div className="flex flex-col items-center gap-2">
+            {/* Icono Caballero */}
+            <IoMan
+              className="w-12 h-12 sm:w-16 sm:h-16 text-[#08554c]"
+              aria-label="Vestimenta para caballeros"
+            />
+            <h3 className="font-lora text-base sm:text-lg md:text-xl font-semibold text-gray-800">
+              Caballeros
+            </h3>
+          </div>
 
-        {/* Botones de Pinterest */}
-        <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 justify-center w-full px-2">
+          <p className="text-center font-lora text-sm sm:text-base md:text-lg px-4 leading-relaxed text-gray-700">
+            Traje formal
+          </p>
+
           <Button
             type="button"
-            variant="bordered"
-            color="primary"
+            variant="solid"
             size="lg"
             as="a"
-            href="https://www.pinterest.com/search/pins/?q=vestimenta%20formal%20hombre%20boda%20azul%20verde%20gris%20vino"
+            href="https://pin.it/F8bRXYm6B"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 sm:flex-none sm:min-w-[180px] bg-white text-sm sm:text-base md:text-lg"
+            className="bg-[#08554c] hover:bg-[#064539] text-white min-w-[140px] sm:min-w-[160px] text-sm sm:text-base transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            <span role="img" aria-label="hombre" className="mr-2 text-xl">
-              👔
-            </span>
-            Opciones Hombre
-          </Button>
-          <Button
-            type="button"
-            variant="bordered"
-            color="primary"
-            size="lg"
-            as="a"
-            href="https://www.pinterest.com/search/pins/?q=vestido%20formal%20mujer%20boda%20azul%20verde%20vino%20rosa%20lavanda"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 sm:flex-none sm:min-w-[180px] bg-white text-sm sm:text-base md:text-lg"
-          >
-            <span role="img" aria-label="mujer" className="mr-2 text-xl">
-              👗
-            </span>
-            Opciones Mujer
+            Ver Más
           </Button>
         </div>
       </CardBody>

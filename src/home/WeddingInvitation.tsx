@@ -1,6 +1,7 @@
 import {
   AttendanceForm,
   BrideGroomImage,
+  CeremonyCard,
   ConfirmationForm,
   Countdown,
   DressCode,
@@ -34,6 +35,7 @@ const WeddingInvitation = ({
         <BrideGroomImage />
         {/* <WeddingMessage />*/}
         <Countdown />
+        <CeremonyCard />
         {/* <Timeline />*/}
         {/*<AddToCalendar /> */}
         {/* <Location />*/}

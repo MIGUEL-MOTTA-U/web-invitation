@@ -1,59 +1,62 @@
-/* Estilos para el carrusel fullscreen */
-.carousel-peek-btn {
-  transition: all 0.3s ease;
-}
-
-.carousel-peek-btn:hover {
-  transform: scale(1.05);
-}
-
-.carousel-peek-btn.left {
-  left: 2%;
-}
-
-.carousel-peek-btn.right {
-  right: 2%;
-}
-
 /* Estilos para los botones de navegación */
 .carousel-arrow {
   transition: all 0.3s ease;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .carousel-arrow:hover {
-  transform: scale(1.1);
+  transform: scale(1.15) translateY(-50%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-/* Animaciones para las imágenes */
-.carousel-peek-btn img {
-  transition: all 0.3s ease;
+.carousel-arrow:active {
+  transform: scale(1.05) translateY(-50%);
 }
 
-.carousel-peek-btn:hover img {
-  transform: scale(1.02);
+/* Animación de fade para las imágenes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .carousel-peek-btn {
-    width: 30%;
-    height: 60%;
-  }
-
   .carousel-arrow {
     font-size: 2rem;
-    padding: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .carousel-peek-btn {
-    width: 25%;
-    height: 50%;
-  }
-
   .carousel-arrow {
     font-size: 1.5rem;
-    padding: 0.25rem;
+    width: 2rem;
+    height: 2rem;
   }
+}
+
+/* Estilos para los dots */
+button[aria-label^="Ir a foto"] {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+button[aria-label^="Ir a foto"]:hover {
+  transform: scale(1.2);
 }

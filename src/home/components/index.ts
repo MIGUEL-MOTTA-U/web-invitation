@@ -1,6 +1,7 @@
 import AddToCalendar from "./AddToCalendar";
 import AttendanceForm from "./AttendanceForm";
 import BrideGroomImage from "./BrideGroomImage";
+import CeremonyCard from "./CeremonyCard";
 import ConfirmationForm from "./ConfirmationForm";
 import Countdown from "./Countdown";
 import DressCode from "./DressCode";
@@ -15,6 +16,7 @@ export {
   AddToCalendar,
   AttendanceForm,
   BrideGroomImage,
+  CeremonyCard,
   ConfirmationForm,
   Countdown,
   DressCode,
