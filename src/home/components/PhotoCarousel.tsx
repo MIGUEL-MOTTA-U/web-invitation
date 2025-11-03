@@ -1,16 +1,16 @@
 import { useRef, useState } from "react";
 import "./PhotoCarousel.css";
 
-import r1 from "../../assets/images/carousel/r1.jpg";
-import r2 from "../../assets/images/carousel/r2.jpg";
-import r3 from "../../assets/images/carousel/r3.jpg";
-import r5 from "../../assets/images/carousel/r5.jpg";
-import r6 from "../../assets/images/carousel/r6.jpg";
+import img1 from "../../assets/images/carousel/img1.jpg";
+import img2 from "../../assets/images/carousel/img2.jpg";
+import img3 from "../../assets/images/carousel/img3.jpg";
+import img5 from "../../assets/images/carousel/img5.jpg";
+import img6 from "../../assets/images/carousel/img6.jpg";
 import r7 from "../../assets/images/carousel/r7.jpg";
-import r8 from "../../assets/images/carousel/r8.jpg";
-import r9 from "../../assets/images/carousel/r9.jpg";
+import img8 from "../../assets/images/carousel/img8.jpg";
+import img9 from "../../assets/images/carousel/img9.jpg";
 
-const images = [r1, r2, r3, r9, r5, r6, r7, r8];
+const images = [img1, img2, img3, img9, img5, img6, r7, img8];
 
 const getIndex = (idx: number) => (idx + images.length) % images.length;
 

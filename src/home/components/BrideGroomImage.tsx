@@ -1,9 +1,9 @@
 import c1 from "../../assets/images/carousel/c1.jpg";
 import c2 from "../../assets/images/carousel/c2.jpg";
 import c3 from "../../assets/images/carousel/c3.jpg";
-import f1 from "../../assets/images/carousel/f1.jpg";
-import f2 from "../../assets/images/carousel/f2.jpg";
-import g4 from "../../assets/images/carousel/g4.jpg";
+import foto1 from "../../assets/images/carousel/foto1.jpg";
+import foto2 from "../../assets/images/carousel/foto2.jpg";
+import foto4 from "../../assets/images/carousel/foto4.jpg";
 
 interface BrideGroomImageProps {
   useAlternativeImages?: boolean;
@@ -12,9 +12,9 @@ interface BrideGroomImageProps {
 const BrideGroomImage = ({
   useAlternativeImages = false,
 }: BrideGroomImageProps) => {
-  const leftImage = useAlternativeImages ? c2 : f2;
-  const centerImage = useAlternativeImages ? c1 : f1;
-  const rightImage = useAlternativeImages ? c3 : g4;
+  const leftImage = useAlternativeImages ? c2 : foto2;
+  const centerImage = useAlternativeImages ? c1 : foto1;
+  const rightImage = useAlternativeImages ? c3 : foto4;
 
   return (
     <div className="w-full mx-auto flex flex-col items-center justify-center select-none relative mb-8 sm:mb-12 md:mb-16 px-2 sm:px-4">
