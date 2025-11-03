@@ -12,7 +12,6 @@ interface BrideGroomImageProps {
 const BrideGroomImage = ({
   useAlternativeImages = false,
 }: BrideGroomImageProps) => {
-  // Seleccionar las imágenes según la prop
   const leftImage = useAlternativeImages ? c2 : f2;
   const centerImage = useAlternativeImages ? c1 : f1;
   const rightImage = useAlternativeImages ? c3 : g4;
