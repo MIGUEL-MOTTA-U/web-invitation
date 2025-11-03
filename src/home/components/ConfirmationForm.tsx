@@ -16,9 +16,6 @@ const ConfirmationForm = () => {
   const { loading, submitGuestForm } = useGuestForm();
   const [formData, setFormData] = useState<CreateGuestRequest>({
     name: "",
-    email: "",
-    phone: "",
-    phoneCountryCode: "",
     message: "",
     confirmed: false,
   });
@@ -42,12 +39,9 @@ const ConfirmationForm = () => {
     }
 
     try {
-      // Crear el objeto sin incluir email y phone
+      // Crear el objeto sin incluir email, phone y phoneCountryCode
       const guestData: CreateGuestRequest = {
         name: formData.name.trim(),
-        email: "",
-        phone: "",
-        phoneCountryCode: "",
         message: formData.message?.trim() || null,
         confirmed: formData.confirmed,
       };
@@ -57,9 +51,6 @@ const ConfirmationForm = () => {
       // Limpiar formulario después del éxito
       setFormData({
         name: "",
-        email: "",
-        phone: "",
-        phoneCountryCode: "",
         message: "",
         confirmed: false,
       });

@@ -10,9 +10,9 @@ export interface GuestDTO {
 
 export interface CreateGuestRequest {
   name: string;
-  email: string;
-  phone: string;
-  phoneCountryCode: string;
+  email?: string | null;
+  phone?: string | null;
+  phoneCountryCode?: string | null;
   message?: string | null;
   confirmed: boolean;
 }
