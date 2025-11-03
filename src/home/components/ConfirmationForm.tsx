@@ -9,18 +9,16 @@ import {
 } from "@heroui/react";
 import type React from "react";
 import { useState } from "react";
-import { CountryCodeSelector } from "../../components/CountryCodeSelector";
 import { useGuestForm } from "../../hooks/useGuestForm";
 import type { CreateGuestRequest } from "../../types/guest";
 
 const ConfirmationForm = () => {
   const { loading, submitGuestForm } = useGuestForm();
-  const [countryCode, setCountryCode] = useState("+57");
   const [formData, setFormData] = useState<CreateGuestRequest>({
     name: "",
     email: "",
     phone: "",
-    phoneCountryCode: "+57",
+    phoneCountryCode: "",
     message: "",
     confirmed: false,
   });
@@ -38,22 +36,18 @@ const ConfirmationForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (
-      !formData.name.trim() ||
-      !formData.email.trim() ||
-      !formData.phone.trim()
-    ) {
-      alert("Por favor completa todos los campos obligatorios");
+    if (!formData.name.trim()) {
+      alert("Por favor ingresa tu nombre");
       return;
     }
 
     try {
-      // Crear el objeto sin incluir el id
+      // Crear el objeto sin incluir email y phone
       const guestData: CreateGuestRequest = {
         name: formData.name.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        phoneCountryCode: countryCode,
+        email: "",
+        phone: "",
+        phoneCountryCode: "",
         message: formData.message?.trim() || null,
         confirmed: formData.confirmed,
       };
@@ -65,11 +59,10 @@ const ConfirmationForm = () => {
         name: "",
         email: "",
         phone: "",
-        phoneCountryCode: "+57",
+        phoneCountryCode: "",
         message: "",
         confirmed: false,
       });
-      setCountryCode("+57");
     } catch {
       // El error ya se maneja en el hook con toast
     }
@@ -128,54 +121,6 @@ const ConfirmationForm = () => {
               variant="bordered"
               color="primary"
             />
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4 md:mb-5 text-lg sm:text-xl md:text-[1.5rem]"
-            >
-              Correo Electrónico *
-            </label>
-            <Input
-              id="email"
-              type="email"
-              size="lg"
-              value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              placeholder="tu@email.com"
-              required
-              className="w-full bg-transparent"
-              variant="bordered"
-              color="primary"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4 md:mb-5 text-lg sm:text-xl md:text-[1.5rem]"
-            >
-              Número de Celular *
-            </label>
-            <div className="flex">
-              <CountryCodeSelector
-                value={countryCode}
-                onChange={setCountryCode}
-              />
-              <Input
-                id="phone"
-                type="tel"
-                size="lg"
-                value={formData.phone}
-                onChange={(e) => handleInputChange("phone", e.target.value)}
-                placeholder="3001234567"
-                required
-                className="w-full rounded-l-none bg-transparent"
-                variant="bordered"
-                color="primary"
-              />
-            </div>
           </div>
 
           <div>
