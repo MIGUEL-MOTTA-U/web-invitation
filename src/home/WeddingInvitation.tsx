@@ -7,14 +7,17 @@ import {
   DressCode,
   GiftSuggestion,
   PhotoCarousel,
+  PhotoStatic,
 } from "./components";
 
 interface WeddingInvitationProps {
   showFullForm?: boolean;
+  showFullDetails?: boolean;
 }
 
 const WeddingInvitation = ({
   showFullForm = false,
+  showFullDetails = false,
 }: WeddingInvitationProps) => {
   return (
     <div className="relative flex flex-col items-center w-full min-h-screen p-4">
@@ -32,16 +35,27 @@ const WeddingInvitation = ({
 
       {/* Contenido principal */}
       <div className="relative z-10 flex flex-col items-center w-full">
-        <BrideGroomImage />
+        <BrideGroomImage useAlternativeImages={!showFullDetails} />
         {/* <WeddingMessage />*/}
         <Countdown />
-        <CeremonyCard />
+
+        {/* Componentes visibles solo en vista completa (/confirmation) */}
+        {showFullDetails && (
+          <>
+            <CeremonyCard />
+            <DressCode />
+            <GiftSuggestion />
+            <PhotoCarousel />
+          </>
+        )}
+
+        {/* Foto estática solo en vista simplificada (/) */}
+        {!showFullDetails && <PhotoStatic />}
+
         {/* <Timeline />*/}
         {/*<AddToCalendar /> */}
         {/* <Location />*/}
-        <DressCode />
-        <GiftSuggestion />
-        <PhotoCarousel />
+
         {showFullForm ? <ConfirmationForm /> : <AttendanceForm />}
       </div>
     </div>
