@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { GuestsPage } from "./guests";
+import { ConfirmationGuestsPage, GuestsPage } from "./guests";
 import { ConfirmationPage, Home } from "./home";
 
 function App() {
@@ -11,6 +11,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/guests" element={<GuestsPage />} />
+        <Route
+          path="/confirmation/guests"
+          element={<ConfirmationGuestsPage />}
+        />
         <Route path="/body" element={<div> body </div>} />
         <Route path="/401" element={<div> Unauthorized </div>} />
         <Route path="*" element={<div> Not Found </div>} />

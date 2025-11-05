@@ -131,3 +131,26 @@ export interface AllGuestsResponse {
     statistics: GuestStatistics;
   };
 }
+
+// Types for simple confirmation guests view (no pagination)
+export interface SimpleGuestStatistics {
+  totalGuests: number;
+  totalCompanions: number;
+  totalPeople: number;
+  confirmedGuests: number;
+  unconfirmedGuests: number;
+  confirmedCompanions: number;
+  unconfirmedCompanions: number;
+  confirmedPeople: number;
+  unconfirmedPeople: number;
+}
+
+export interface SimpleGuestsResponse {
+  message: string;
+  status: number;
+  type: string;
+  payload: {
+    guests: GuestWithCompanions[];
+    statistics: SimpleGuestStatistics;
+  };
+}

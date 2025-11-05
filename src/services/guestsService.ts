@@ -6,6 +6,7 @@ import type {
   GuestDTO,
   OutputMessage,
   SimpleGuest,
+  SimpleGuestsResponse,
 } from "../types/guest";
 import api from "./api";
 
@@ -93,6 +94,13 @@ class GuestsService {
   // Obtener un invitado por ID (si tu backend lo soporta)
   async getGuestById(id: string): Promise<GuestDTO> {
     const response = await api.get(`/guests/${id}`);
+    return response.data;
+  }
+
+  // Obtener todos los invitados con acompañantes (sin paginación)
+  // Para la vista de confirmación simple
+  async getSimpleGuestsWithCompanions(): Promise<SimpleGuestsResponse> {
+    const response = await api.get("/guests");
     return response.data;
   }
 }
