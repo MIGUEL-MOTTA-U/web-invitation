@@ -68,7 +68,9 @@ const ConfirmationForm = () => {
     if (companions.length > 0) {
       const emptyCompanions = companions.filter((c) => !c.name.trim());
       if (emptyCompanions.length > 0) {
-        alert("Por favor completa los nombres de todos los acompañantes o elimínalos");
+        alert(
+          "Por favor completa los nombres de todos los acompañantes o elimínalos"
+        );
         return;
       }
     }
@@ -159,26 +161,6 @@ const ConfirmationForm = () => {
             />
           </div>
 
-          <div>
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4 md:mb-5 text-lg sm:text-xl md:text-[1.5rem]"
-            >
-              ¿Tienes algún mensaje para nosotros?
-            </label>
-            <Textarea
-              id="message"
-              size="lg"
-              value={formData.message || ""}
-              onChange={(e) => handleInputChange("message", e.target.value)}
-              placeholder="Déjanos un mensaje..."
-              className="w-full bg-transparent"
-              variant="bordered"
-              color="primary"
-              minRows={3}
-            />
-          </div>
-
           {/* Sección de acompañantes - solo si confirmed es true */}
           {formData.confirmed && (
             <div className="space-y-4">
@@ -234,6 +216,26 @@ const ConfirmationForm = () => {
               </Button>
             </div>
           )}
+
+          <div>
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4 md:mb-5 text-lg sm:text-xl md:text-[1.5rem]"
+            >
+              ¿Tienes algún mensaje para nosotros?
+            </label>
+            <Textarea
+              id="message"
+              size="lg"
+              value={formData.message || ""}
+              onChange={(e) => handleInputChange("message", e.target.value)}
+              placeholder="Déjanos un mensaje..."
+              className="w-full bg-transparent"
+              variant="bordered"
+              color="primary"
+              minRows={3}
+            />
+          </div>
 
           <Button
             type="submit"
