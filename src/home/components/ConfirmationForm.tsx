@@ -119,7 +119,7 @@ const ConfirmationForm = () => {
               htmlFor="message"
               className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4 md:mb-5 text-lg sm:text-xl md:text-[1.5rem]"
             >
-              ¿Tienes algún mensaje para nosotros? (opcional)
+              ¿Tienes algún mensaje para nosotros?
             </label>
             <Textarea
               id="message"

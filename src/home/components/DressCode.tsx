@@ -18,6 +18,32 @@ const DressCode = () => {
         {/* Separador */}
         <div className="w-full border-t border-gray-200 my-2" />
 
+        {/* Colores Reservados */}
+        <div className="flex flex-col items-center gap-4 w-full">
+          <h3 className="font-lora text-lg sm:text-xl md:text-2xl font-semibold text-gray-800">
+            Colores Reservados
+          </h3>
+          <div className="flex gap-6 sm:gap-8 items-center justify-center">
+            {/* Círculo Blanco */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white border-4 border-gray-300 shadow-lg" />
+              <span className="text-xs font-bold sm:text-sm font-lora text-gray-700">
+                Blanco
+              </span>
+            </div>
+            {/* Círculo Verde Esmeralda */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#08554c] shadow-lg" />
+              <span className="text-xs font-bold sm:text-sm font-lora text-gray-700">
+                Verde Esmeralda
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Separador */}
+        <div className="w-full border-t border-gray-200 my-2" />
+
         {/* Sección Damas */}
         <div className="flex flex-col items-center gap-4 w-full">
           <div className="flex flex-col items-center gap-2">
@@ -71,7 +97,7 @@ const DressCode = () => {
           </div>
 
           <p className="text-center font-lora text-sm sm:text-base md:text-lg px-4 leading-relaxed text-gray-700">
-            Traje formal
+            Traje formal - Zapato formal o tenis blancos
           </p>
 
           <Button

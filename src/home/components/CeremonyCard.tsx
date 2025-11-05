@@ -4,7 +4,7 @@ const CeremonyCard = () => {
   const ceremonyAddress = "Vía Suba-Cota Km 3 Camino Clínica Corpas, Suba";
 
   // Hora de la ceremonia
-  const ceremonyTime = "2:00 PM";
+  const ceremonyTime = "3:00 PM";
 
   // URL de Google Maps con la ubicación
   const googleMapsUrl =
