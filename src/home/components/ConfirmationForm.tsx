@@ -10,15 +10,17 @@ import {
 import type React from "react";
 import { useState } from "react";
 import { useGuestForm } from "../../hooks/useGuestForm";
-import type { CreateGuestRequest } from "../../types/guest";
+import type { CreateGuestRequest, SimpleGuest } from "../../types/guest";
 
 const ConfirmationForm = () => {
-  const { loading, submitGuestForm } = useGuestForm();
+  const { loading, submitGuestWithCompanions } = useGuestForm();
   const [formData, setFormData] = useState<CreateGuestRequest>({
     name: "",
     message: "",
     confirmed: false,
   });
+
+  const [companions, setCompanions] = useState<SimpleGuest[]>([]);
 
   const handleInputChange = (
     field: keyof CreateGuestRequest,
@@ -28,6 +30,30 @@ const ConfirmationForm = () => {
       ...prev,
       [field]: value,
     }));
+
+    // Si cambia la confirmación a "no", limpiar acompañantes
+    if (field === "confirmed" && value === false) {
+      setCompanions([]);
+    }
+  };
+
+  const addCompanion = () => {
+    setCompanions((prev) => [
+      ...prev,
+      { name: "", confirmed: formData.confirmed },
+    ]);
+  };
+
+  const removeCompanion = (index: number) => {
+    setCompanions((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const updateCompanionName = (index: number, name: string) => {
+    setCompanions((prev) =>
+      prev.map((companion, i) =>
+        i === index ? { ...companion, name } : companion
+      )
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,15 +64,33 @@ const ConfirmationForm = () => {
       return;
     }
 
+    // Validar que los acompañantes tengan nombre si hay alguno
+    if (companions.length > 0) {
+      const emptyCompanions = companions.filter((c) => !c.name.trim());
+      if (emptyCompanions.length > 0) {
+        alert("Por favor completa los nombres de todos los acompañantes o elimínalos");
+        return;
+      }
+    }
+
     try {
-      // Crear el objeto sin incluir email, phone y phoneCountryCode
-      const guestData: CreateGuestRequest = {
+      // Filtrar y limpiar los acompañantes válidos
+      const validCompanions = companions
+        .filter((c) => c.name.trim())
+        .map((c) => ({
+          name: c.name.trim(),
+          confirmed: formData.confirmed, // Los acompañantes tienen la misma confirmación
+        }));
+
+      // Crear el objeto con el invitado principal y sus acompañantes (si los hay)
+      const guestWithCompanions = {
         name: formData.name.trim(),
-        message: formData.message?.trim() || null,
         confirmed: formData.confirmed,
+        companions: validCompanions,
       };
 
-      await submitGuestForm(guestData);
+      // Enviar a /guests con o sin acompañantes
+      await submitGuestWithCompanions(guestWithCompanions);
 
       // Limpiar formulario después del éxito
       setFormData({
@@ -54,6 +98,7 @@ const ConfirmationForm = () => {
         message: "",
         confirmed: false,
       });
+      setCompanions([]);
     } catch {
       // El error ya se maneja en el hook con toast
     }
@@ -133,6 +178,62 @@ const ConfirmationForm = () => {
               minRows={3}
             />
           </div>
+
+          {/* Sección de acompañantes - solo si confirmed es true */}
+          {formData.confirmed && (
+            <div className="space-y-4">
+              {/** biome-ignore lint/a11y/noLabelWithoutControl: No big deal for now */}
+              <label className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4 md:mb-5 text-lg sm:text-xl md:text-[1.5rem]">
+                Acompañantes
+              </label>
+
+              {companions.length > 0 ? (
+                <div className="space-y-3">
+                  {companions.map((companion, index) => (
+                    // biome-ignore lint/suspicious/noArrayIndexKey: No big deal for now
+                    <div key={index} className="flex gap-2 items-start">
+                      <Input
+                        type="text"
+                        size="md"
+                        value={companion.name}
+                        onChange={(e) =>
+                          updateCompanionName(index, e.target.value)
+                        }
+                        placeholder={`Nombre acompañante ${index + 1}`}
+                        className="flex-1 bg-transparent"
+                        variant="bordered"
+                        color="primary"
+                      />
+                      <Button
+                        type="button"
+                        size="md"
+                        variant="bordered"
+                        color="danger"
+                        onPress={() => removeCompanion(index)}
+                        className="min-w-unit-10 h-[2.5rem]"
+                      >
+                        ✕
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-gray-500 italic text-center">
+                  No hay acompañantes agregados
+                </p>
+              )}
+
+              <Button
+                type="button"
+                variant="bordered"
+                color="primary"
+                onPress={addCompanion}
+                className="w-full h-[2.5rem] sm:h-[2.8rem] uppercase bg-transparent text-sm sm:text-base md:text-[1rem]"
+              >
+                + Agregar acompañante
+              </Button>
+            </div>
+          )}
 
           <Button
             type="submit"

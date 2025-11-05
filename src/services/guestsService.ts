@@ -16,6 +16,15 @@ class GuestsService {
     return response.data;
   }
 
+  // Método específico para el formulario de confirmación
+  // Envía a /guests con el invitado principal y opcionalmente sus acompañantes
+  async createGuestWithCompanions(
+    guestData: CreateGuestsBulkRequest
+  ): Promise<OutputMessage> {
+    const response = await api.post("/guests", guestData);
+    return response.data;
+  }
+
   // Crear múltiples invitados simples (solo nombre + confirmado)
   // Accepts either an array of SimpleGuest or the full CreateGuestsBulkRequest shape.
   // Converts to { name, confirmed, companions: SimpleGuest[] } and posts to /guests/bulk

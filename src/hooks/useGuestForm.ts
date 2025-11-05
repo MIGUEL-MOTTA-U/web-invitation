@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { guestsService } from "../services/guestsService";
-import type { CreateGuestRequest, SimpleGuest } from "../types/guest";
+import type {
+  CreateGuestRequest,
+  CreateGuestsBulkRequest,
+  SimpleGuest,
+} from "../types/guest";
 
 export const useGuestForm = () => {
   const [loading, setLoading] = useState(false);
@@ -24,7 +28,26 @@ export const useGuestForm = () => {
     }
   };
 
-  // Nuevo método: enviar arreglo de invitados simples
+  // Método específico para el formulario de confirmación con acompañantes
+  // Envía a /guests con el invitado principal y opcionalmente sus acompañantes
+  const submitGuestWithCompanions = async (
+    guestData: CreateGuestsBulkRequest
+  ) => {
+    setLoading(true);
+    try {
+      const response = await guestsService.createGuestWithCompanions(guestData);
+      toast.success("¡Invitación enviada exitosamente!");
+      return response;
+    } catch (e: unknown) {
+      const err = e as Error;
+      toast.error("Error al enviar el formulario");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Nuevo método: enviar arreglo de invitados simples (usa /guests/bulk)
   const submitGuestsArray = async (guests: SimpleGuest[]) => {
     setLoading(true);
     try {
@@ -42,7 +65,8 @@ export const useGuestForm = () => {
 
   return {
     loading,
-    submitGuestForm, // compatibilidad
-    submitGuestsArray,
+    submitGuestForm, // compatibilidad - para crear invitado sin acompañantes
+    submitGuestWithCompanions, // para formulario de confirmación con/sin acompañantes
+    submitGuestsArray, // para envío bulk a /guests/bulk
   };
 };
